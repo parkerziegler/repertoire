@@ -5995,6 +5995,65 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./pages/components/audio.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
+(function () {
+  var enterModule = __webpack_require__("./node_modules/react-hot-loader/patch.js").enterModule;
+
+  enterModule && enterModule(module);
+})();
+
+
+
+var StyledAudio = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].audio.withConfig({
+  displayName: 'audio__StyledAudio',
+  componentId: 'ial0gw-0'
+})(['']);
+
+var _default = StyledAudio;
+/* harmony default export */ __webpack_exports__["a"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = __webpack_require__("./node_modules/react-hot-loader/patch.js").default;
+
+  var leaveModule = __webpack_require__("./node_modules/react-hot-loader/patch.js").leaveModule;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(StyledAudio, 'StyledAudio', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js');
+  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js');
+  leaveModule(module);
+})();
+
+;
+    (function (Component, route) {
+      if(!Component) return
+      if (false) return
+      module.hot.accept()
+      Component.__route = route
+
+      if (module.hot.status() === 'idle') return
+
+      var components = next.router.components
+      for (var r in components) {
+        if (!components.hasOwnProperty(r)) continue
+
+        if (components[r].Component.__route === route) {
+          next.router.update(r, Component)
+        }
+      }
+    })(typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__.default : (module.exports.default || module.exports), "/components/audio")
+  
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "./pages/components/header.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6014,7 +6073,8 @@ var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/co
 
 
 var Header = function Header(_ref) {
-  var className = _ref.className;
+  var className = _ref.className,
+      children = _ref.children;
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'header',
     { className: className, __source: {
@@ -6030,7 +6090,7 @@ var Header = function Header(_ref) {
           lineNumber: 6
         }
       },
-      'Repertoire'
+      children
     )
   );
 };
@@ -6090,6 +6150,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/cjs/react.development.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_header__ = __webpack_require__("./pages/components/header.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_audio__ = __webpack_require__("./pages/components/audio.js");
 var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/index.js';
 
 (function () {
@@ -6101,16 +6162,39 @@ var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/in
 
 
 
+
 var _default = function _default() {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    __WEBPACK_IMPORTED_MODULE_1__components_header__["a" /* default */],
+    'div',
     {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 4
+        lineNumber: 6
       }
     },
-    'Hey Parkie-Doo'
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_1__components_header__["a" /* default */],
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 7
+        }
+      },
+      'Repertoire'
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_2__components_audio__["a" /* default */],
+      { controls: true, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 8
+        }
+      },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('source', { src: 'https://www.w3schools.com/html/horse.ogg', type: 'audio/ogg', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 9
+        }
+      })
+    )
   );
 };
 

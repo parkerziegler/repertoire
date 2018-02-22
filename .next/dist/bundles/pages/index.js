@@ -72,6 +72,23 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./pages/components/audio.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("styled-components");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_styled_components__);
+
+
+var StyledAudio = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.audio.withConfig({
+  displayName: 'audio__StyledAudio',
+  componentId: 'ial0gw-0'
+})(['']);
+
+/* harmony default export */ __webpack_exports__["a"] = (StyledAudio);
+
+/***/ }),
+
 /***/ "./pages/components/header.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85,7 +102,8 @@ var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/co
 
 
 var Header = function Header(_ref) {
-  var className = _ref.className;
+  var className = _ref.className,
+      children = _ref.children;
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'header',
     { className: className, __source: {
@@ -101,7 +119,7 @@ var Header = function Header(_ref) {
           lineNumber: 6
         }
       },
-      'Repertoire'
+      children
     )
   );
 };
@@ -123,20 +141,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_header__ = __webpack_require__("./pages/components/header.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_audio__ = __webpack_require__("./pages/components/audio.js");
 var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/index.js';
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    __WEBPACK_IMPORTED_MODULE_1__components_header__["a" /* default */],
+    'div',
     {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 4
+        lineNumber: 6
       }
     },
-    'Hey Parkie-Doo'
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_1__components_header__["a" /* default */],
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 7
+        }
+      },
+      'Repertoire'
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_2__components_audio__["a" /* default */],
+      { controls: true, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 8
+        }
+      },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('source', { src: 'https://www.w3schools.com/html/horse.ogg', type: 'audio/ogg', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 9
+        }
+      })
+    )
   );
 });
 
