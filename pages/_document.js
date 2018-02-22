@@ -15,14 +15,15 @@ export default class MyDocument extends Document {
         <Head>
           <title>Repertoire</title>
           <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet" />
+          <style>{`
+
+            body { 
+              margin: 0px;
+            }
+
+          `}</style>
           {this.props.styleTags}
         </Head>
-        <style jsx global>{`
-          body { 
-            margin: 0;
-            background: blue;
-          }
-        `}</style>
         <body>
           <Main />
           <NextScript />
