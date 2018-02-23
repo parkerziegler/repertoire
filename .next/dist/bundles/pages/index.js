@@ -76,14 +76,47 @@ module.exports =
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("styled-components");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_styled_components__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_components__ = __webpack_require__("styled-components");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_styled_components__);
+var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js';
 
 
-var StyledAudio = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.audio.withConfig({
+
+var Audio = function Audio(_ref) {
+  var className = _ref.className,
+      children = _ref.children,
+      albumArt = _ref.albumArt,
+      albumName = _ref.albumName;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'div',
+    { className: className, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 5
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'audio',
+      { controls: true, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 6
+        }
+      },
+      children
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: albumArt, alt: albumName, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 9
+      }
+    })
+  );
+};
+
+var StyledAudio = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_styled_components___default()(Audio).withConfig({
   displayName: 'audio__StyledAudio',
   componentId: 'ial0gw-0'
-})(['']);
+})(['border:1px solid gray;background:aquamarine;display:flex;width:50vw;height:10vh;justify-content:space-between;align-items:center;margin:1vh;padding-left:2%;box-sizing:border-box;img{height:100%;}']);
 
 /* harmony default export */ __webpack_exports__["a"] = (StyledAudio);
 
@@ -150,8 +183,11 @@ var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/in
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
-    {
-      __source: {
+    { style: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }, __source: {
         fileName: _jsxFileName,
         lineNumber: 6
       }
@@ -161,21 +197,21 @@ var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/in
       {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 7
+          lineNumber: 11
         }
       },
       'Repertoire'
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       __WEBPACK_IMPORTED_MODULE_2__components_audio__["a" /* default */],
-      { controls: true, __source: {
+      { controls: true, albumArt: '/static/dixie-charles.jpg', albumName: 'Dixie-Pup', __source: {
           fileName: _jsxFileName,
-          lineNumber: 8
+          lineNumber: 12
         }
       },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('source', { src: 'https://www.w3schools.com/html/horse.ogg', type: 'audio/ogg', __source: {
           fileName: _jsxFileName,
-          lineNumber: 9
+          lineNumber: 13
         }
       })
     )
