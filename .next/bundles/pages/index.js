@@ -6037,9 +6037,21 @@ var Audio = function (_React$Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Audio.__proto__ || Object.getPrototypeOf(Audio)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       currentTime: 0,
-      value: 0.5
+      value: 0.5,
+      duration: '00:00'
     }, _this.onClickHandler = function () {
       _this.audio.play();
+    }, _this.parseDuration = function () {
+      var duration = _this.audio.duration;
+      var minutes = Math.floor(duration / 60).toString();
+      var seconds = Number(duration - minutes * 60).toString().substr(0, 2);
+      return minutes + ':' + seconds;
+    }, _this.parseCurrentTime = function () {
+      var currentTime = _this.audio.currentTime;
+      var currentHour = parseInt(currentTime / 3600) % 24;
+      var currentMinute = parseInt(currentTime / 60) % 60;
+      var currentSeconds = Number(currentTime % 60).toFixed();
+      return currentMinute < 10 ? '0' + currentMinute : '' + currentMinute + currentSeconds < 10 ? '0' + currentSeconds : '' + currentSeconds;
     }, _this.seek = function (evt) {
       var percent = evt.x;
       _this.setState({
@@ -6050,6 +6062,14 @@ var Audio = function (_React$Component) {
   }
 
   _createClass(Audio, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var duration = this.parseDuration(this.audio.duration);
+      this.setState({
+        duration: duration
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -6065,7 +6085,7 @@ var Audio = function (_React$Component) {
         'div',
         { className: className, __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 51
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -6074,58 +6094,58 @@ var Audio = function (_React$Component) {
               return _this2.audio = audio;
             }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 29
+              lineNumber: 52
             }
           },
           children
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'http://www.lukeduncan.me/images/play-button.png', onClick: this.onClickHandler, alt: 'Play', className: 'play', __source: {
             fileName: _jsxFileName,
-            lineNumber: 32
+            lineNumber: 55
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'progress-container', __source: {
               fileName: _jsxFileName,
-              lineNumber: 33
+              lineNumber: 56
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('progress', { value: this.state.value, max: 1, onClick: this.seek, __source: {
               fileName: _jsxFileName,
-              lineNumber: 34
+              lineNumber: 57
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'progress-label-container', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 35
+                lineNumber: 58
               }
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'progress-label', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 36
+                  lineNumber: 59
                 }
               },
-              '00:00'
+              this.parseCurrentTime()
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'progress-label', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 37
+                  lineNumber: 60
                 }
               },
-              '00:00'
+              this.state.duration
             )
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: albumArt, alt: albumName, __source: {
             fileName: _jsxFileName,
-            lineNumber: 40
+            lineNumber: 63
           }
         })
       );
@@ -6314,13 +6334,6 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.refs.audio);
-      console.log(this.audio);
-      console.log("Hello");
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -6333,7 +6346,7 @@ var App = function (_React$Component) {
             alignItems: 'center'
           }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 15
+            lineNumber: 9
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -6341,7 +6354,7 @@ var App = function (_React$Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 20
+              lineNumber: 14
             }
           },
           'Repertoire'
@@ -6357,12 +6370,12 @@ var App = function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 21
+              lineNumber: 15
             }
           },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('source', { src: 'https://www.w3schools.com/html/horse.ogg', type: 'audio/ogg', __source: {
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('source', { src: 'http://www.lukeduncan.me/oslo.mp3', type: 'audio/mp3', __source: {
               fileName: _jsxFileName,
-              lineNumber: 27
+              lineNumber: 21
             }
           })
         )
@@ -6382,7 +6395,7 @@ var _default = function _default() {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 28
     }
   });
 };

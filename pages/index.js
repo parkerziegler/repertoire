@@ -4,12 +4,6 @@ import Audio from './components/audio';
 
 class App extends React.Component {
 
-  componentDidMount() {
-    console.log(this.refs.audio);
-    console.log(this.audio);
-    console.log("Hello");
-  }
-
   render() {
     return (
       <div style={{
@@ -24,7 +18,7 @@ class App extends React.Component {
           albumName="Dixie-Pup"
           ref={(audio) => this.audio = audio}
         >
-          <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg" />
+          <source src="http://www.lukeduncan.me/oslo.mp3" type="audio/mp3" />
         </Audio>
       </div>
     );

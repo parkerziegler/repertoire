@@ -5,11 +5,34 @@ class Audio extends React.Component {
 
   state = {
     currentTime: 0,
-    value: 0.5
+    value: 0.5,
+    duration: '00:00'
+  }
+
+  componentDidMount() {
+    const duration = this.parseDuration(this.audio.duration);
+    this.setState({
+      duration
+    });
   }
 
   onClickHandler = () => {
     this.audio.play();
+  }
+
+  parseDuration = () => {
+    const duration = this.audio.duration;
+    const minutes = Math.floor(duration / 60).toString();
+    const seconds = Number(duration - minutes * 60).toString().substr(0, 2);
+    return `${minutes}:${seconds}`;
+  }
+
+  parseCurrentTime = () => {
+    const currentTime = this.audio.currentTime;
+    const currentHour = parseInt(currentTime / 3600) % 24;
+    const currentMinute = parseInt(currentTime / 60) % 60;
+    const currentSeconds = Number(currentTime % 60).toFixed();
+    return currentMinute < 10 ? `0${currentMinute}` : `${currentMinute}` + currentSeconds < 10 ? `0${currentSeconds}` : `${currentSeconds}`;
   }
 
   seek = (evt) => {
@@ -33,8 +56,8 @@ class Audio extends React.Component {
         <div className="progress-container">
           <progress value={this.state.value} max={1} onClick={this.seek} />
           <div className="progress-label-container">
-            <span className="progress-label">00:00</span>
-            <span className="progress-label">00:00</span>
+            <span className="progress-label">{this.parseCurrentTime()}</span>
+            <span className="progress-label">{this.state.duration}</span>
           </div>
         </div>
         <img src={albumArt} alt={albumName} />
