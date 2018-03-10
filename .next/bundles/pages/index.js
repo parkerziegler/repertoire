@@ -6036,22 +6036,43 @@ var Audio = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Audio.__proto__ || Object.getPrototypeOf(Audio)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      currentTime: 0,
-      value: 0.5,
+      currentTime: '00:00',
+      value: 0,
       duration: '00:00'
+    }, _this.onLoadedMetadata = function (e) {
+      var currentTime = _this.parseCurrentTime(e.target);
+      var duration = _this.parseDuration(e.target);
+      _this.setState({
+        currentTime: currentTime,
+        duration: duration
+      });
+    }, _this.onPlaying = function () {
+      var currentTime = _this.parseCurrentTime(_this.audio);
+      var value = _this.parseValue(_this.audio);
+      _this.setState({
+        currentTime: currentTime,
+        value: value
+      });
     }, _this.onClickHandler = function () {
       _this.audio.play();
-    }, _this.parseDuration = function () {
-      var duration = _this.audio.duration;
+      setInterval(function () {
+        _this.onPlaying();
+      }, 500);
+    }, _this.parseDuration = function (audio) {
+      var duration = audio.duration;
       var minutes = Math.floor(duration / 60).toString();
       var seconds = Number(duration - minutes * 60).toString().substr(0, 2);
       return minutes + ':' + seconds;
-    }, _this.parseCurrentTime = function () {
-      var currentTime = _this.audio.currentTime;
+    }, _this.parseCurrentTime = function (audio) {
+      var currentTime = audio.currentTime;
       var currentHour = parseInt(currentTime / 3600) % 24;
       var currentMinute = parseInt(currentTime / 60) % 60;
       var currentSeconds = Number(currentTime % 60).toFixed();
-      return currentMinute < 10 ? '0' + currentMinute : '' + currentMinute + currentSeconds < 10 ? '0' + currentSeconds : '' + currentSeconds;
+      return (currentMinute < 10 ? '0' + currentMinute : '' + currentMinute) + ":" + (currentSeconds < 10 ? '0' + currentSeconds : '' + currentSeconds);
+    }, _this.parseValue = function (audio) {
+      var duration = audio.duration;
+      var currentTime = audio.currentTime;
+      return currentTime / duration;
     }, _this.seek = function (evt) {
       var percent = evt.x;
       _this.setState({
@@ -6062,14 +6083,6 @@ var Audio = function (_React$Component) {
   }
 
   _createClass(Audio, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var duration = this.parseDuration(this.audio.duration);
-      this.setState({
-        duration: duration
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -6085,58 +6098,58 @@ var Audio = function (_React$Component) {
         'div',
         { className: className, __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 71
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'audio',
           { ref: function ref(audio) {
               return _this2.audio = audio;
-            }, __source: {
+            }, onLoadedMetadata: this.onLoadedMetadata, onPlaying: this.onPlaying, onPlay: this.onPlaying, __source: {
               fileName: _jsxFileName,
-              lineNumber: 52
+              lineNumber: 72
             }
           },
           children
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'http://www.lukeduncan.me/images/play-button.png', onClick: this.onClickHandler, alt: 'Play', className: 'play', __source: {
             fileName: _jsxFileName,
-            lineNumber: 55
+            lineNumber: 75
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'progress-container', __source: {
               fileName: _jsxFileName,
-              lineNumber: 56
+              lineNumber: 76
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('progress', { value: this.state.value, max: 1, onClick: this.seek, __source: {
               fileName: _jsxFileName,
-              lineNumber: 57
+              lineNumber: 77
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'progress-label-container', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 58
+                lineNumber: 78
               }
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'progress-label', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 59
+                  lineNumber: 79
                 }
               },
-              this.parseCurrentTime()
+              this.state.currentTime
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'progress-label', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 60
+                  lineNumber: 80
                 }
               },
               this.state.duration
@@ -6145,7 +6158,7 @@ var Audio = function (_React$Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: albumArt, alt: albumName, __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 83
           }
         })
       );
@@ -6163,7 +6176,7 @@ var Audio = function (_React$Component) {
 var StyledAudio = /*#__PURE__*/Object(__WEBPACK_IMPORTED_MODULE_1_styled_components__["a" /* default */])(Audio).withConfig({
   displayName: 'audio__StyledAudio',
   componentId: 'ial0gw-0'
-})(['border:1px solid gray;background:aquamarine;display:flex;width:50vw;height:10vh;justify-content:space-between;align-items:center;margin:1vh;padding-left:1%;box-sizing:border-box;.play{height:50%;}.progress-container{width:30vw;display:flex;flex-direction:column;progress{width:100%;}.progress-label-container{display:flex;justify-content:space-between;.progress-label{color:white;}}}img{height:100%;}']);
+})(['border:1px solid gray;background:aquamarine;display:flex;width:50%;height:100px;justify-content:space-between;align-items:center;margin:1vh;padding-left:1%;box-sizing:border-box;.play{height:50%;}.progress-container{width:30vw;display:flex;flex-direction:column;progress{width:100%;}.progress-label-container{display:flex;justify-content:space-between;.progress-label{color:white;}}}img{height:100%;}']);
 
 var _default = StyledAudio;
 /* harmony default export */ __webpack_exports__["a"] = (_default);
