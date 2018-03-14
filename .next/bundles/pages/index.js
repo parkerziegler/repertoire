@@ -265,105 +265,7 @@ module.exports = function isObject(val) {
 
 /***/ }),
 
-/***/ "./node_modules/object-assign/index.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/prop-types/checkPropTypes.js":
+/***/ "./node_modules/next/node_modules/prop-types/checkPropTypes.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -379,7 +281,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 if (true) {
   var invariant = __webpack_require__("./node_modules/fbjs/lib/invariant.js");
   var warning = __webpack_require__("./node_modules/fbjs/lib/warning.js");
-  var ReactPropTypesSecret = __webpack_require__("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+  var ReactPropTypesSecret = __webpack_require__("./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js");
   var loggedTypeFailures = {};
 }
 
@@ -430,7 +332,7 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ "./node_modules/prop-types/factoryWithTypeCheckers.js":
+/***/ "./node_modules/next/node_modules/prop-types/factoryWithTypeCheckers.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -448,8 +350,8 @@ var invariant = __webpack_require__("./node_modules/fbjs/lib/invariant.js");
 var warning = __webpack_require__("./node_modules/fbjs/lib/warning.js");
 var assign = __webpack_require__("./node_modules/object-assign/index.js");
 
-var ReactPropTypesSecret = __webpack_require__("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
-var checkPropTypes = __webpack_require__("./node_modules/prop-types/checkPropTypes.js");
+var ReactPropTypesSecret = __webpack_require__("./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js");
+var checkPropTypes = __webpack_require__("./node_modules/next/node_modules/prop-types/checkPropTypes.js");
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -980,7 +882,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 /***/ }),
 
-/***/ "./node_modules/prop-types/index.js":
+/***/ "./node_modules/next/node_modules/prop-types/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1005,7 +907,7 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__("./node_modules/prop-types/factoryWithTypeCheckers.js")(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__("./node_modules/next/node_modules/prop-types/factoryWithTypeCheckers.js")(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -1015,7 +917,7 @@ if (true) {
 
 /***/ }),
 
-/***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
+/***/ "./node_modules/next/node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1031,6 +933,104 @@ if (true) {
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+
+/***/ "./node_modules/object-assign/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
 
 
 /***/ }),
@@ -2173,6 +2173,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 /* unused harmony export withTheme */
 /* unused harmony export ServerStyleSheet */
 /* unused harmony export StyleSheetManager */
+/* unused harmony export __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object__ = __webpack_require__("./node_modules/is-plain-object/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_is_plain_object__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis__ = __webpack_require__("./node_modules/stylis/stylis.js");
@@ -2181,7 +2182,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_stylis_rule_sheet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_stylis_rule_sheet__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__("./node_modules/react/cjs/react.development.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__("./node_modules/prop-types/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__("./node_modules/next/node_modules/prop-types/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__ = __webpack_require__("./node_modules/styled-components/node_modules/hoist-non-react-statics/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__);
@@ -2289,13 +2290,23 @@ var flatten = function flatten(chunks, executionContext) {
 };
 
 // 
+// NOTE: This stylis instance is only used to split rules from SSR'd style tags
+var stylisSplitter = new __WEBPACK_IMPORTED_MODULE_1_stylis___default.a({
+  global: false,
+  cascade: false,
+  keyframe: false,
+  prefix: false,
+  compress: false,
+  semicolon: true
+});
+
 var stylis = new __WEBPACK_IMPORTED_MODULE_1_stylis___default.a({
   global: false,
   cascade: true,
   keyframe: false,
   prefix: true,
   compress: false,
-  semicolon: true
+  semicolon: false // NOTE: This means "autocomplete missing semicolons"
 });
 
 // Wrap `insertRulePlugin to build a list of rules,
@@ -2317,6 +2328,7 @@ var parseRulesPlugin = __WEBPACK_IMPORTED_MODULE_2_stylis_rule_sheet___default()
 });
 
 stylis.use([parseRulesPlugin, returnRulesPlugin]);
+stylisSplitter.use([parseRulesPlugin, returnRulesPlugin]);
 
 var stringifyRules = function stringifyRules(rules, selector, prefix) {
   var flatCSS = rules.join('').replace(/^\s*\/\/.*$/gm, ''); // replace JS comments
@@ -2326,6 +2338,10 @@ var stringifyRules = function stringifyRules(rules, selector, prefix) {
   return stylis(prefix || !selector ? '' : selector, cssStr);
 };
 
+var splitByRules = function splitByRules(css) {
+  return stylisSplitter('', css);
+};
+
 // 
 
 function isStyledComponent(target) /* : %checks */{
@@ -2333,44 +2349,42 @@ function isStyledComponent(target) /* : %checks */{
 }
 
 // 
-/**
- * When using streaming rendering, style blocks are emitted in chunks directly
- * next to the HTML they reference. In order to prevent errors during rehydration
- * (since React doesn't know about the style blocks we are interleaving) this
- * method relocates all styled-component blocks to the end of `<head>`.
- *
- * NOTE: this method MUST be called before ReactDOM.hydrate().
- */
+
+/* This function is DEPRECATED and will be removed on the next major version release.
+ * It was needed to rehydrate all style blocks prepended to chunks before React
+ * tries to rehydrate its HTML stream. Since the master StyleSheet will now detect
+ * the use of streamed style tags and will perform the rehydration earlier when needed
+ * this function will not be needed anymore */
 function consolidateStreamedStyles() {
-  var blocks = Array.from(document.querySelectorAll('style[data-styled-components]'));
-
-  if (blocks.length) {
-    var frag = document.createDocumentFragment();
-
-    for (var i = 0, len = blocks.length; i < len; i += 1) {
-      // $FlowFixMe
-      frag.appendChild(blocks[i].parentNode.removeChild(blocks[i]));
-    }
-
-    // $FlowFixMe
-    document.head.appendChild(frag);
+  if (true) {
+    // eslint-disable-next-line no-console
+    console.warn('styled-components automatically does streaming SSR rehydration now.\n' + 'Calling consolidateStreamedStyles manually is no longer necessary and a noop now.\n' + '- Please remove the consolidateStreamedStyles call from your client.');
   }
 }
 
 // 
-var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-var charsLength = chars.length;
+/* eslint-disable no-bitwise */
 
-/* Some high number, usually 9-digit base-10. Map it to base-😎 */
+/* This is the "capacity" of our alphabet i.e. 2x26 for all letters plus their capitalised
+ * counterparts */
+var charsLength = 52;
+
+/* start at 75 for 'a' until 'z' (25) and then start at 65 for capitalised letters */
+var getAlphabeticChar = function getAlphabeticChar(code) {
+  return String.fromCharCode(code + (code > 25 ? 39 : 97));
+};
+
+/* input a number, usually a hash and convert it to base-52 */
 var generateAlphabeticName = function generateAlphabeticName(code) {
   var name = '';
   var x = void 0;
 
+  /* get a char and divide by alphabet-length */
   for (x = code; x > charsLength; x = Math.floor(x / charsLength)) {
-    name = chars[x % charsLength] + name;
+    name = getAlphabeticChar(x % charsLength) + name;
   }
 
-  return chars[x % charsLength] + name;
+  return getAlphabeticChar(x % charsLength) + name;
 };
 
 // 
@@ -2390,10 +2404,23 @@ var css = (function (strings) {
   return flatten(interleave(strings, interpolations));
 });
 
+var stream = {}
+
+// 
+
+
+var SC_ATTR = 'data-styled-components';
+var SC_STREAM_ATTR = 'data-styled-streamed';
+var CONTEXT_KEY = '__styled-components-stylesheet__';
+
+var IS_BROWSER = typeof window !== 'undefined';
+
+var DISABLE_SPEEDY = typeof false === 'boolean' && false || "development" !== 'production';
+
 // 
 var SC_COMPONENT_ID = /^[^\S\n]*?\/\* sc-component-id:\s*(\S+)\s+\*\//gm;
 
-var extractCompsFromCSS = (function (maybeCSS) {
+var extractComps = (function (maybeCSS) {
   var css = '' + (maybeCSS || ''); // Definitely a string, and a clone
   var existingComponents = [];
   css.replace(SC_COMPONENT_ID, function (match, componentId, matchIndex) {
@@ -2415,6 +2442,19 @@ var extractCompsFromCSS = (function (maybeCSS) {
 
 var getNonce = (function () {
   return  true ? __webpack_require__.nc : null;
+});
+
+// 
+// Helper to call a given function, only once
+var once = (function (cb) {
+  var called = false;
+
+  return function () {
+    if (!called) {
+      called = true;
+      cb();
+    }
+  };
 });
 
 var classCallCheck = function (instance, Constructor) {
@@ -2508,498 +2548,774 @@ var possibleConstructorReturn = function (self, call) {
 };
 
 // 
-/* eslint-disable no-underscore-dangle */
-/*
- * Browser Style Sheet with Rehydration
- *
- * <style data-styled-components="x y z"
- *        data-styled-components-is-local="true">
- *   /· sc-component-id: a ·/
- *   .sc-a { ... }
- *   .x { ... }
- *   /· sc-component-id: b ·/
- *   .sc-b { ... }
- *   .y { ... }
- *   .z { ... }
- * </style>
- *
- * Note: replace · with * in the above snippet.
- * */
-var DISABLE_SPEEDY = typeof false === 'boolean' && false || "development" !== 'production';
+/* These are helpers for the StyleTags to keep track of the injected
+ * rule names for each (component) ID that they're keeping track of.
+ * They're crucial for detecting whether a name has already been
+ * injected.
+ * (This excludes rehydrated names) */
 
-var COMPONENTS_PER_TAG = 40;
-var SPEEDY_COMPONENTS_PER_TAG = 1000; // insertRule allows more injections before a perf slowdown
-
-// Source: https://github.com/threepointone/glamor/blob/master/src/sheet.js#L32-L43
-var sheetForTag = function sheetForTag(tag) {
-  if (tag.sheet) {
-    // $FlowFixMe
-    return tag.sheet;
+/* adds a new ID:name pairing to a names dictionary */
+var addNameForId = function addNameForId(names, id, name) {
+  if (name) {
+    // eslint-disable-next-line no-param-reassign
+    var namesForId = names[id] || (names[id] = Object.create(null));
+    namesForId[name] = true;
   }
-
-  for (var i = 0; i < document.styleSheets.length; i += 1) {
-    if (document.styleSheets[i].ownerNode === tag) {
-      // $FlowFixMe
-      return document.styleSheets[i];
-    }
-  }
-
-  // NOTE: This should never happen
-  throw new Error('');
 };
 
-// Safely (try/catch) injects rule at index and returns whether it was successful
-var safeInsertRule = function safeInsertRule(sheet, cssRule, index) {
-  if (cssRule === undefined || cssRule.length === 0) {
-    return false;
+/* resets an ID entirely by overwriting it in the dictionary */
+var resetIdNames = function resetIdNames(names, id) {
+  // eslint-disable-next-line no-param-reassign
+  names[id] = Object.create(null);
+};
+
+/* factory for a names dictionary checking the existance of an ID:name pairing */
+var hasNameForId = function hasNameForId(names) {
+  return function (id, name) {
+    return names[id] !== undefined && names[id][name];
+  };
+};
+
+/* stringifies names for the html/element output */
+var stringifyNames = function stringifyNames(names) {
+  var str = '';
+  // eslint-disable-next-line guard-for-in
+  for (var id in names) {
+    str += Object.keys(names[id]).join(' ') + ' ';
+  }
+  return str.trim();
+};
+
+/* clones the nested names dictionary */
+var cloneNames = function cloneNames(names) {
+  var clone = Object.create(null);
+  // eslint-disable-next-line guard-for-in
+  for (var id in names) {
+    clone[id] = _extends({}, names[id]);
+  }
+  return clone;
+};
+
+// 
+/* These are helpers that deal with the insertRule (aka speedy) API
+ * They are used in the StyleTags and specifically the speedy tag
+ */
+
+/* retrieve a sheet for a given style tag */
+var sheetForTag = function sheetForTag(tag) {
+  // $FlowFixMe
+  if (tag.sheet) return tag.sheet;
+
+  /* Firefox quirk requires us to step through all stylesheets to find one owned by the given tag */
+  var size = document.styleSheets.length;
+  for (var i = 0; i < size; i += 1) {
+    var sheet = document.styleSheets[i];
+    // $FlowFixMe
+    if (sheet.ownerNode === tag) return sheet;
   }
 
+  /* we should always be able to find a tag */
+  throw new Error();
+};
+
+/* insert a rule safely and return whether it was actually injected */
+var safeInsertRule = function safeInsertRule(sheet, cssRule, index) {
+  /* abort early if cssRule string is falsy */
+  if (!cssRule) return false;
+
   var maxIndex = sheet.cssRules.length;
-  var cappedIndex = index <= maxIndex ? index : maxIndex;
 
   try {
-    sheet.insertRule(cssRule, cappedIndex);
+    /* use insertRule and cap passed index with maxIndex (no of cssRules) */
+    sheet.insertRule(cssRule, index <= maxIndex ? index : maxIndex);
   } catch (err) {
-    // NOTE: An invalid rule here means it's not supported by the browser or obviously malformed
+    /* any error indicates an invalid rule */
     return false;
   }
 
   return true;
 };
 
-// Counts up the number of rules inside the array until a specific component entry is found
-// This is used to determine the necessary insertRule index
-var sizeUpToComponentIndex = function sizeUpToComponentIndex(componentSizes, componentIndex) {
-  var cssRulesSize = 0;
-  for (var i = 0; i <= componentIndex; i += 1) {
-    cssRulesSize += componentSizes[i];
-  }
-
-  return cssRulesSize;
-};
-
-var BaseBrowserTag = function () {
-  function BaseBrowserTag() {
-    classCallCheck(this, BaseBrowserTag);
-  }
-
-  BaseBrowserTag.prototype.toReactElement = function toReactElement() {
-    throw new Error( true ? "BrowserTag doesn't implement toReactElement!" : '');
-  };
-
-  BaseBrowserTag.prototype.clone = function clone() {
-    throw new Error( true ? 'BrowserTag cannot be cloned!' : '');
-  };
-
-  BaseBrowserTag.prototype.getComponentIds = function getComponentIds() {
-    return Object.keys(this.components);
-  };
-
-  return BaseBrowserTag;
-}();
-
-var BrowserTag = void 0;
-if (!DISABLE_SPEEDY) {
-  BrowserTag = function (_BaseBrowserTag) {
-    inherits(SpeedyBrowserTag, _BaseBrowserTag);
-
-    // Store component ruleSizes in an array per component (in order)
-
-
-    function SpeedyBrowserTag(el, isLocal, existingSource) {
-      classCallCheck(this, SpeedyBrowserTag);
-
-      var _this = possibleConstructorReturn(this, _BaseBrowserTag.call(this));
-
-      var nonce = getNonce();
-      if (nonce) {
-        el.setAttribute('nonce', nonce);
-      }
-
-      var extractedComps = extractCompsFromCSS(existingSource);
-
-      _this.el = el;
-      _this.isLocal = isLocal;
-      _this.ready = false;
-      _this.componentSizes = [];
-      _this.size = extractedComps.length;
-      _this.components = extractedComps.reduce(function (acc, obj) {
-        acc[obj.componentId] = obj; // eslint-disable-line no-param-reassign
-        return acc;
-      }, {});
-      return _this;
-    }
-
-    /* Because we care about source order, before we can inject anything we need to
-     * create a text node for each component and replace the existing CSS. */
-
-
-    SpeedyBrowserTag.prototype.replaceElement = function replaceElement() {
-      var _this2 = this;
-
-      // Build up our replacement style tag
-      var newEl = this.el.cloneNode(false);
-
-      if (!this.el.parentNode) {
-        throw new Error( true ? "Trying to replace an element that wasn't mounted!" : '');
-      }
-
-      // workaround for an IE/Edge bug: https://twitter.com/probablyup/status/958138927981977600
-      newEl.appendChild(document.createTextNode(''));
-
-      // $FlowFixMe
-      this.el.parentNode.replaceChild(newEl, this.el);
-      this.el = newEl;
-      this.ready = true;
-
-      // Retrieve the sheet for the new style tag
-      var sheet = sheetForTag(newEl);
-
-      Object.keys(this.components).forEach(function (componentId) {
-        var comp = _this2.components[componentId];
-        var cssFromDOM = comp.cssFromDOM;
-
-        var rules = stringifyRules([cssFromDOM]);
-        var rulesSize = rules.length;
-
-        var injectedRules = 0;
-        for (var j = 0; j < rulesSize; j += 1) {
-          if (safeInsertRule(sheet, rules[j], sheet.cssRules.length)) {
-            injectedRules += 1;
-          }
-        }
-
-        comp.componentIndex = _this2.componentSizes.length;
-        comp.css = rules.join(' ');
-        _this2.componentSizes.push(injectedRules);
-      });
-    };
-
-    SpeedyBrowserTag.prototype.isSealed = function isSealed() {
-      return this.size >= SPEEDY_COMPONENTS_PER_TAG;
-    };
-
-    SpeedyBrowserTag.prototype.addComponent = function addComponent(componentId) {
-      if (!this.ready) this.replaceElement();
-
-      if ("development" !== 'production' && this.components[componentId]) {
-        throw new Error('Trying to add Component \'' + componentId + '\' twice!');
-      }
-
-      this.components[componentId] = {
-        componentIndex: this.componentSizes.length,
-        css: ''
-      };
-
-      this.componentSizes.push(0);
-      this.size += 1;
-    };
-
-    SpeedyBrowserTag.prototype.inject = function inject(componentId, cssRules, name) {
-      if (!this.ready) this.replaceElement();
-
-      var comp = this.components[componentId];
-      if ("development" !== 'production' && !comp) {
-        throw new Error('Must add a new component before you can inject css into it');
-      }
-
-      var cssRulesSize = cssRules.length;
-      var sheet = sheetForTag(this.el);
-      var componentIndex = comp.componentIndex;
-
-      // Determine start index for injection
-
-      var insertIndex = sizeUpToComponentIndex(this.componentSizes, componentIndex);
-
-      // Inject each rule shifting index forward for each one (in-order injection)
-      var injectedRules = 0;
-      for (var i = 0; i < cssRulesSize; i += 1) {
-        var cssRule = cssRules[i];
-        if (safeInsertRule(sheet, cssRule, insertIndex + injectedRules)) {
-          comp.css += ' ' + cssRule;
-          injectedRules += 1;
-        }
-      }
-
-      // Update number of rules for component
-      this.componentSizes[componentIndex] += injectedRules;
-
-      if (name !== undefined && name !== null) {
-        var existingNames = this.el.getAttribute(SC_ATTR);
-        this.el.setAttribute(SC_ATTR, existingNames ? existingNames + ' ' + name : name);
-      }
-    };
-
-    SpeedyBrowserTag.prototype.toRawCSS = function toRawCSS() {
-      return ''; // NOTE: Unsupported in production mode (SpeedyBrowserTag)
-    };
-
-    SpeedyBrowserTag.prototype.toHTML = function toHTML() {
-      return ''; // NOTE: Unsupported in production mode (SpeedyBrowserTag)
-    };
-
-    return SpeedyBrowserTag;
-  }(BaseBrowserTag);
-} else {
-  BrowserTag = function (_BaseBrowserTag2) {
-    inherits(TextNodeBrowserTag, _BaseBrowserTag2);
-
-    function TextNodeBrowserTag(el, isLocal) {
-      var existingSource = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      classCallCheck(this, TextNodeBrowserTag);
-
-      var _this3 = possibleConstructorReturn(this, _BaseBrowserTag2.call(this));
-
-      var nonce = getNonce();
-      if (nonce !== null) {
-        el.setAttribute('nonce', nonce);
-      }
-
-      var extractedComps = extractCompsFromCSS(existingSource);
-
-      _this3.el = el;
-      _this3.isLocal = isLocal;
-      _this3.ready = false;
-      _this3.size = extractedComps.length;
-      _this3.components = extractedComps.reduce(function (acc, obj) {
-        acc[obj.componentId] = obj; // eslint-disable-line no-param-reassign
-        return acc;
-      }, {});
-      return _this3;
-    }
-
-    TextNodeBrowserTag.prototype.isSealed = function isSealed() {
-      return this.size >= COMPONENTS_PER_TAG;
-    };
-
-    TextNodeBrowserTag.prototype.addComponent = function addComponent(componentId) {
-      if (!this.ready) this.replaceElement();
-      if ("development" !== 'production' && this.components[componentId]) {
-        throw new Error('Trying to add Component \'' + componentId + '\' twice!');
-      }
-
-      var comp = { componentId: componentId, textNode: document.createTextNode('') };
-      this.el.appendChild(comp.textNode);
-      this.size += 1;
-      this.components[componentId] = comp;
-    };
-
-    TextNodeBrowserTag.prototype.inject = function inject(componentId, css, name) {
-      if (!this.ready) this.replaceElement();
-      var comp = this.components[componentId];
-
-      if ("development" !== 'production' && !comp) {
-        throw new Error('Must add a new component before you can inject css into it');
-      }
-
-      if (comp.textNode.data === '') {
-        comp.textNode.appendData('\n/* sc-component-id: ' + componentId + ' */\n');
-      }
-
-      comp.textNode.appendData(css.join(' '));
-
-      if (name !== undefined && name !== null) {
-        var existingNames = this.el.getAttribute(SC_ATTR);
-        this.el.setAttribute(SC_ATTR, existingNames ? existingNames + ' ' + name : name);
-      }
-    };
-
-    TextNodeBrowserTag.prototype.toHTML = function toHTML() {
-      return this.el.outerHTML;
-    };
-
-    TextNodeBrowserTag.prototype.toReactElement = function toReactElement() {
-      throw new Error( true ? "BrowserTag doesn't implement toReactElement!" : '');
-    };
-
-    TextNodeBrowserTag.prototype.clone = function clone() {
-      throw new Error( true ? 'BrowserTag cannot be cloned!' : '');
-    };
-
-    /* Because we care about source order, before we can inject anything we need to
-     * create a text node for each component and replace the existing CSS. */
-
-
-    TextNodeBrowserTag.prototype.replaceElement = function replaceElement() {
-      var _this4 = this;
-
-      this.ready = true;
-      // We have nothing to inject. Use the current el.
-      if (this.size === 0) return;
-
-      // Build up our replacement style tag
-      var newEl = this.el.cloneNode(false);
-      newEl.appendChild(document.createTextNode('\n'));
-
-      Object.keys(this.components).forEach(function (key) {
-        var comp = _this4.components[key];
-
-        // eslint-disable-next-line no-param-reassign
-        comp.textNode = document.createTextNode(comp.cssFromDOM);
-        newEl.appendChild(comp.textNode);
-      });
-
-      if (!this.el.parentNode) {
-        throw new Error( true ? "Trying to replace an element that wasn't mounted!" : '');
-      }
-
-      // The ol' switcheroo
-      this.el.parentNode.replaceChild(newEl, this.el);
-      this.el = newEl;
-    };
-
-    return TextNodeBrowserTag;
-  }(BaseBrowserTag);
-}
-
-/* Factory function to separate DOM operations from logical ones*/
-var BrowserStyleSheet = {
-  create: function create() {
-    var tags = [];
-    var names = {};
-
-    /* Construct existing state from DOM */
-    var nodes = document.querySelectorAll('[' + SC_ATTR + ']');
-    var nodesLength = nodes.length;
-
-    for (var i = 0; i < nodesLength; i += 1) {
-      // $FlowFixMe: We can trust that all elements in this query are style elements
-      var el = nodes[i];
-      var attr = el.getAttribute(SC_ATTR);
-
-      if (attr) {
-        attr.trim().split(/\s+/).forEach(function (name) {
-          names[name] = true;
-        });
-      }
-
-      tags.push(new BrowserTag(el, el.getAttribute(LOCAL_ATTR) === 'true', el.textContent));
-    }
-
-    /* Factory for making more tags */
-    var tagConstructor = function tagConstructor(isLocal) {
-      var el = document.createElement('style');
-      el.type = 'text/css';
-      el.setAttribute(SC_ATTR, '');
-      el.setAttribute(LOCAL_ATTR, isLocal ? 'true' : 'false');
-      if (!document.head) {
-        throw new Error( true ? 'Missing document <head>' : '');
-      }
-      document.head.appendChild(el);
-      return new BrowserTag(el, isLocal);
-    };
-
-    return new StyleSheet(tagConstructor, tags, names);
+/* deletes `size` rules starting from `removalIndex` */
+var deleteRules = function deleteRules(sheet, removalIndex, size) {
+  var lowerBound = removalIndex - size;
+  for (var i = removalIndex; i >= lowerBound; i -= 1) {
+    sheet.deleteRule(i);
   }
 };
 
 // 
-var SC_ATTR = 'data-styled-components';
-var LOCAL_ATTR = 'data-styled-components-is-local';
-var CONTEXT_KEY = '__styled-components-stylesheet__';
-
 /* eslint-disable flowtype/object-type-delimiter */
-/* eslint-enable flowtype/object-type-delimiter */
+/* eslint-disable react/prop-types */
 
-var instance = null;
-// eslint-disable-next-line no-use-before-define
-var clones = [];
+/* this error is used for makeStyleTag */
+var parentNodeUnmountedErr =  true ? '\nTrying to insert a new style tag, but the given Node is unmounted!\n- Are you using a custom target that isn\'t mounted?\n- Does your document not have a valid head element?\n- Have you accidentally removed a style tag manually?\n'.trim() : '';
 
-var IS_BROWSER = typeof document !== 'undefined';
+/* this error is used for tags */
+var throwCloneTagErr = function throwCloneTagErr() {
+  throw new Error( true ? '\nThe clone method cannot be used on the client!\n- Are you running in a client-like environment on the server?\n- Are you trying to run SSR on the client?\n'.trim() : '');
+};
 
-var StyleSheet = function () {
-  function StyleSheet(tagConstructor) {
-    var tags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    var names = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    classCallCheck(this, StyleSheet);
-    this.hashes = {};
-    this.deferredInjections = {};
-    this.stylesCacheable = IS_BROWSER;
+/* this marker separates component styles and is important for rehydration */
+var makeTextMarker = function makeTextMarker(id) {
+  return '\n/* sc-component-id: ' + id + ' */\n';
+};
 
-    this.tagConstructor = tagConstructor;
-    this.tags = tags;
-    this.names = names;
-    this.constructComponentTagMap();
-    this.isStreaming = false;
+/* add up all numbers in array up until and including the index */
+var addUpUntilIndex = function addUpUntilIndex(sizes, index) {
+  var totalUpToIndex = 0;
+  for (var i = 0; i <= index; i += 1) {
+    totalUpToIndex += sizes[i];
   }
 
-  // helper for `ComponentStyle` to know when it cache static styles.
-  // staticly styled-component can not safely cache styles on the server
-  // without all `ComponentStyle` instances saving a reference to the
-  // the styleSheet instance they last rendered with,
-  // or listening to creation / reset events. otherwise you might create
-  // a component with one stylesheet and render it another api response
-  // with another, losing styles on from your server-side render.
+  return totalUpToIndex;
+};
 
+/* create a new style tag after lastEl */
+var makeStyleTag = function makeStyleTag(target, tagEl, insertBefore) {
+  var el = document.createElement('style');
+  el.setAttribute(SC_ATTR, '');
 
-  StyleSheet.prototype.constructComponentTagMap = function constructComponentTagMap() {
+  var nonce = getNonce();
+  if (nonce) {
+    el.setAttribute('nonce', nonce);
+  }
+
+  /* Work around insertRule quirk in EdgeHTML */
+  el.appendChild(document.createTextNode(''));
+
+  if (target && !tagEl) {
+    /* Append to target when no previous element was passed */
+    target.appendChild(el);
+  } else {
+    if (!tagEl || !target || !tagEl.parentNode) {
+      throw new Error(parentNodeUnmountedErr);
+    }
+
+    /* Insert new style tag after the previous one */
+    tagEl.parentNode.insertBefore(el, insertBefore ? tagEl : tagEl.nextSibling);
+  }
+
+  return el;
+};
+
+/* takes a css factory function and outputs an html styled tag factory */
+var wrapAsHtmlTag = function wrapAsHtmlTag(css, names) {
+  return function (additionalAttrs) {
+    var nonce = getNonce();
+    var attrs = [nonce && 'nonce="' + nonce + '"', SC_ATTR + '="' + stringifyNames(names) + '"', additionalAttrs];
+
+    var htmlAttr = attrs.filter(Boolean).join(' ');
+    return '<style ' + htmlAttr + '>' + css() + '</style>';
+  };
+};
+
+/* takes a css factory function and outputs an element factory */
+var wrapAsElement = function wrapAsElement(css, names) {
+  return function () {
+    var _props;
+
+    var props = (_props = {}, _props[SC_ATTR] = stringifyNames(names), _props);
+
+    var nonce = getNonce();
+    if (nonce) {
+      // $FlowFixMe
+      props.nonce = nonce;
+    }
+
+    // eslint-disable-next-line react/no-danger
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('style', _extends({}, props, { dangerouslySetInnerHTML: { __html: css() } }));
+  };
+};
+
+var getIdsFromMarkersFactory = function getIdsFromMarkersFactory(markers) {
+  return function () {
+    return Object.keys(markers);
+  };
+};
+
+/* speedy tags utilise insertRule */
+var makeSpeedyTag = function makeSpeedyTag(el, getImportRuleTag) {
+  var names = Object.create(null);
+  var markers = Object.create(null);
+  var sizes = [];
+
+  var extractImport = getImportRuleTag !== undefined;
+  /* indicates whther getImportRuleTag was called */
+  var usedImportRuleTag = false;
+
+  var insertMarker = function insertMarker(id) {
+    var prev = markers[id];
+    if (prev !== undefined) {
+      return prev;
+    }
+
+    var marker = markers[id] = sizes.length;
+    sizes.push(0);
+    resetIdNames(names, id);
+    return marker;
+  };
+
+  var insertRules = function insertRules(id, cssRules, name) {
+    var marker = insertMarker(id);
+    var sheet = sheetForTag(el);
+    var insertIndex = addUpUntilIndex(sizes, marker);
+
+    var injectedRules = 0;
+    var importRules = [];
+    var cssRulesSize = cssRules.length;
+
+    for (var i = 0; i < cssRulesSize; i += 1) {
+      var cssRule = cssRules[i];
+      var mayHaveImport = extractImport; /* @import rules are reordered to appear first */
+      if (mayHaveImport && cssRule.indexOf('@import') !== -1) {
+        importRules.push(cssRule);
+      } else if (safeInsertRule(sheet, cssRule, insertIndex + injectedRules)) {
+        mayHaveImport = false;
+        injectedRules += 1;
+      }
+    }
+
+    if (extractImport && importRules.length > 0) {
+      usedImportRuleTag = true;
+      // $FlowFixMe
+      getImportRuleTag().insertRules(id + '-import', importRules);
+    }
+
+    sizes[marker] += injectedRules; /* add up no of injected rules */
+    addNameForId(names, id, name);
+  };
+
+  var removeRules = function removeRules(id) {
+    var marker = markers[id];
+    if (marker === undefined) return;
+
+    var size = sizes[marker];
+    var sheet = sheetForTag(el);
+    var removalIndex = addUpUntilIndex(sizes, marker);
+    deleteRules(sheet, removalIndex, size);
+    sizes[marker] = 0;
+    resetIdNames(names, id);
+
+    if (extractImport && usedImportRuleTag) {
+      // $FlowFixMe
+      getImportRuleTag().removeRules(id + '-import');
+    }
+  };
+
+  var css = function css() {
+    var _sheetForTag = sheetForTag(el),
+        cssRules = _sheetForTag.cssRules;
+
+    var str = '';
+    var i = 0;
+
+    // eslint-disable-next-line guard-for-in
+    for (var id in markers) {
+      str += makeTextMarker(id);
+      var end = markers[id] + i;
+      for (; i < end; i += 1) {
+        str += cssRules[i].cssText;
+      }
+    }
+
+    return str;
+  };
+
+  return {
+    styleTag: el,
+    getIds: getIdsFromMarkersFactory(markers),
+    hasNameForId: hasNameForId(names),
+    insertMarker: insertMarker,
+    insertRules: insertRules,
+    removeRules: removeRules,
+    css: css,
+    toHTML: wrapAsHtmlTag(css, names),
+    toElement: wrapAsElement(css, names),
+    clone: throwCloneTagErr
+  };
+};
+
+var makeBrowserTag = function makeBrowserTag(el, getImportRuleTag) {
+  var names = Object.create(null);
+  var markers = Object.create(null);
+
+  var extractImport = getImportRuleTag !== undefined;
+  var makeTextNode = function makeTextNode(id) {
+    return document.createTextNode(makeTextMarker(id));
+  };
+
+  /* indicates whther getImportRuleTag was called */
+  var usedImportRuleTag = false;
+
+  var insertMarker = function insertMarker(id) {
+    var prev = markers[id];
+    if (prev !== undefined) {
+      return prev;
+    }
+
+    var marker = markers[id] = makeTextNode(id);
+    el.appendChild(marker);
+    names[id] = Object.create(null);
+    return marker;
+  };
+
+  var insertRules = function insertRules(id, cssRules, name) {
+    var marker = insertMarker(id);
+    var importRules = [];
+    var cssRulesSize = cssRules.length;
+
+    for (var i = 0; i < cssRulesSize; i += 1) {
+      var rule = cssRules[i];
+      var mayHaveImport = extractImport;
+      if (mayHaveImport && rule.indexOf('@import') !== -1) {
+        importRules.push(rule);
+      } else {
+        mayHaveImport = false;
+        var separator = i === cssRulesSize - 1 ? '' : ' ';
+        marker.appendData('' + rule + separator);
+      }
+    }
+
+    addNameForId(names, id, name);
+
+    if (extractImport && importRules.length > 0) {
+      usedImportRuleTag = true;
+      // $FlowFixMe
+      getImportRuleTag().insertRules(id + '-import', importRules);
+    }
+  };
+
+  var removeRules = function removeRules(id) {
+    var marker = markers[id];
+    if (marker === undefined) return;
+
+    /* create new empty text node and replace the current one */
+    var newMarker = makeTextNode(id);
+    el.replaceChild(newMarker, marker);
+    markers[id] = newMarker;
+    resetIdNames(names, id);
+
+    if (extractImport && usedImportRuleTag) {
+      // $FlowFixMe
+      getImportRuleTag().removeRules(id + '-import');
+    }
+  };
+
+  var css = function css() {
+    var str = '';
+    // eslint-disable-next-line guard-for-in
+    for (var id in markers) {
+      str += markers[id].data;
+    }
+    return str;
+  };
+
+  return {
+    styleTag: el,
+    getIds: getIdsFromMarkersFactory(markers),
+    hasNameForId: hasNameForId(names),
+    insertMarker: insertMarker,
+    insertRules: insertRules,
+    removeRules: removeRules,
+    css: css,
+    toHTML: wrapAsHtmlTag(css, names),
+    toElement: wrapAsElement(css, names),
+    clone: throwCloneTagErr
+  };
+};
+
+var makeServerTag = function makeServerTag() {
+  var names = Object.create(null);
+  var markers = Object.create(null);
+
+  var insertMarker = function insertMarker(id) {
+    var prev = markers[id];
+    if (prev !== undefined) {
+      return prev;
+    }
+
+    return markers[id] = [''];
+  };
+
+  var insertRules = function insertRules(id, cssRules, name) {
+    var marker = insertMarker(id);
+    marker[0] += cssRules.join(' ');
+    addNameForId(names, id, name);
+  };
+
+  var removeRules = function removeRules(id) {
+    var marker = markers[id];
+    if (marker === undefined) return;
+    marker[0] = '';
+    resetIdNames(names, id);
+  };
+
+  var css = function css() {
+    var str = '';
+    // eslint-disable-next-line guard-for-in
+    for (var id in markers) {
+      var cssForId = markers[id][0];
+      if (cssForId) {
+        str += makeTextMarker(id) + cssForId;
+      }
+    }
+    return str;
+  };
+
+  var tag = {
+    styleTag: null,
+    getIds: getIdsFromMarkersFactory(markers),
+    hasNameForId: hasNameForId(names),
+    insertMarker: insertMarker,
+    insertRules: insertRules,
+    removeRules: removeRules,
+    css: css,
+    toHTML: wrapAsHtmlTag(css, names),
+    toElement: wrapAsElement(css, names),
+    clone: function clone() {
+      return _extends({}, tag, {
+        names: cloneNames(names),
+        markers: _extends({}, markers)
+      });
+    }
+  };
+
+  return tag;
+};
+
+var makeTag = function makeTag(target, tagEl, forceServer, insertBefore, getImportRuleTag) {
+  if (IS_BROWSER && !forceServer) {
+    var el = makeStyleTag(target, tagEl, insertBefore);
+    if (DISABLE_SPEEDY) {
+      return makeBrowserTag(el, getImportRuleTag);
+    } else {
+      return makeSpeedyTag(el, getImportRuleTag);
+    }
+  }
+
+  return makeServerTag();
+};
+
+/* wraps a given tag so that rehydration is performed once when necessary */
+var makeRehydrationTag = function makeRehydrationTag(tag, els, extracted, names, immediateRehydration) {
+  /* rehydration function that adds all rules to the new tag */
+  var rehydrate = once(function () {
+    /* add all extracted components to the new tag */
+    for (var i = 0; i < extracted.length; i += 1) {
+      var _extracted$i = extracted[i],
+          componentId = _extracted$i.componentId,
+          cssFromDOM = _extracted$i.cssFromDOM;
+
+      var cssRules = splitByRules(cssFromDOM);
+      tag.insertRules(componentId, cssRules);
+    }
+
+    /* remove old HTMLStyleElements, since they have been rehydrated */
+    for (var _i = 0; _i < els.length; _i += 1) {
+      var el = els[_i];
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  });
+
+  if (immediateRehydration) rehydrate();
+
+  return _extends({}, tag, {
+    /* add rehydration hook to insertion methods */
+    insertMarker: function insertMarker(id) {
+      rehydrate();
+      return tag.insertMarker(id);
+    },
+    insertRules: function insertRules(id, cssRules, name) {
+      rehydrate();
+      return tag.insertRules(id, cssRules, name);
+    }
+  });
+};
+
+// 
+
+/* determine the maximum number of components before tags are sharded */
+var MAX_SIZE = void 0;
+if (IS_BROWSER) {
+  /* in speedy mode we can keep a lot more rules in a sheet before a slowdown can be expected */
+  MAX_SIZE = DISABLE_SPEEDY ? 40 : 1000;
+} else {
+  /* for servers we do not need to shard at all */
+  MAX_SIZE = -1;
+}
+
+var sheetRunningId = 0;
+var master = void 0;
+
+var StyleSheet = function () {
+  /* a map from ids to tags */
+  /* deferred rules for a given id */
+  /* this is used for not reinjecting rules via hasNameForId() */
+  /* when rules for an id are removed using remove() we have to ignore rehydratedNames for it */
+  /* a list of tags belonging to this StyleSheet */
+  /* a tag for import rules */
+  /* current capacity until a new tag must be created */
+  /* children (aka clones) of this StyleSheet inheriting all and future injections */
+
+  function StyleSheet() {
     var _this = this;
 
-    this.componentTags = {};
+    var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : IS_BROWSER ? document.head : null;
+    var forceServer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    classCallCheck(this, StyleSheet);
 
-    this.tags.forEach(function (tag) {
-      tag.getComponentIds().forEach(function (componentId) {
-        _this.componentTags[componentId] = tag;
-      });
+    this.getImportRuleTag = function () {
+      var importRuleTag = _this.importRuleTag;
+
+      if (importRuleTag !== undefined) {
+        return importRuleTag;
+      }
+
+      var firstTag = _this.tags[0];
+      var insertBefore = true;
+
+      return _this.importRuleTag = makeTag(_this.target, firstTag ? firstTag.styleTag : null, _this.forceServer, insertBefore);
+    };
+
+    this.id = sheetRunningId += 1;
+    this.sealed = false;
+    this.forceServer = forceServer;
+    this.target = forceServer ? null : target;
+    this.tagMap = {};
+    this.deferred = {};
+    this.rehydratedNames = {};
+    this.ignoreRehydratedNames = {};
+    this.tags = [];
+    this.capacity = 1;
+    this.clones = [];
+  }
+
+  /* rehydrate all SSR'd style tags */
+
+
+  StyleSheet.prototype.rehydrate = function rehydrate() {
+    if (!IS_BROWSER || this.forceServer) {
+      return this;
+    }
+
+    var els = [];
+    var names = [];
+    var extracted = [];
+    var isStreamed = false;
+
+    /* retrieve all of our SSR style elements from the DOM */
+    var nodes = document.querySelectorAll('style[' + SC_ATTR + ']');
+    var nodesSize = nodes.length;
+
+    /* abort rehydration if no previous style tags were found */
+    if (nodesSize === 0) {
+      return this;
+    }
+
+    for (var i = 0; i < nodesSize; i += 1) {
+      // $FlowFixMe: We can trust that all elements in this query are style elements
+      var el = nodes[i];
+
+      /* check if style tag is a streamed tag */
+      isStreamed = !!el.getAttribute(SC_STREAM_ATTR) || isStreamed;
+
+      /* retrieve all component names */
+      var elNames = (el.getAttribute(SC_ATTR) || '').trim().split(/\s+/);
+      var elNamesSize = elNames.length;
+      for (var j = 0; j < elNamesSize; j += 1) {
+        var name = elNames[j];
+        /* add rehydrated name to sheet to avoid readding styles */
+        this.rehydratedNames[name] = true;
+        names.push(name);
+      }
+
+      /* extract all components and their CSS */
+      extracted = extracted.concat(extractComps(el.textContent));
+      /* store original HTMLStyleElement */
+      els.push(el);
+    }
+
+    /* abort rehydration if nothing was extracted */
+    var extractedSize = extracted.length;
+    if (extractedSize === 0) {
+      return this;
+    }
+
+    /* create a tag to be used for rehydration */
+    var tag = this.makeTag(null);
+    var rehydrationTag = makeRehydrationTag(tag, els, extracted, names, isStreamed);
+
+    /* reset capacity and adjust MAX_SIZE by the initial size of the rehydration */
+    this.capacity = Math.max(1, MAX_SIZE - extractedSize);
+    this.tags.push(rehydrationTag);
+
+    /* retrieve all component ids */
+    for (var _j = 0; _j < extractedSize; _j += 1) {
+      this.tagMap[extracted[_j].componentId] = rehydrationTag;
+    }
+
+    return this;
+  };
+
+  /* retrieve a "master" instance of StyleSheet which is typically used when no other is available
+   * The master StyleSheet is targeted by injectGlobal, keyframes, and components outside of any
+    * StyleSheetManager's context */
+
+
+  /* reset the internal "master" instance */
+  StyleSheet.reset = function reset() {
+    var forceServer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    master = new StyleSheet(undefined, forceServer).rehydrate();
+  };
+
+  /* adds "children" to the StyleSheet that inherit all of the parents' rules
+   * while their own rules do not affect the parent */
+
+
+  StyleSheet.prototype.clone = function clone() {
+    var sheet = new StyleSheet(this.target, this.forceServer);
+    /* add to clone array */
+    this.clones.push(sheet);
+
+    /* clone all tags */
+    sheet.tags = this.tags.map(function (tag) {
+      var ids = tag.getIds();
+      var newTag = tag.clone();
+
+      /* reconstruct tagMap */
+      for (var i = 0; i < ids.length; i += 1) {
+        sheet.tagMap[ids[i]] = newTag;
+      }
+
+      return newTag;
     });
+
+    /* clone other maps */
+    sheet.rehydratedNames = _extends({}, this.rehydratedNames);
+    sheet.deferred = _extends({}, this.deferred);
+
+    return sheet;
   };
 
-  /* Best level of caching—get the name from the hash straight away. */
+  /* force StyleSheet to create a new tag on the next injection */
 
 
-  StyleSheet.prototype.getName = function getName(hash) {
-    return this.hashes[hash.toString()];
+  StyleSheet.prototype.sealAllTags = function sealAllTags() {
+    this.capacity = 1;
+    this.sealed = true;
   };
 
-  /* Second level of caching—if the name is already in the dom, don't
-   * inject anything and record the hash for getName next time. */
+  StyleSheet.prototype.makeTag = function makeTag$$1(tag) {
+    var lastEl = tag ? tag.styleTag : null;
+    var insertBefore = false;
 
-
-  StyleSheet.prototype.alreadyInjected = function alreadyInjected(hash, name) {
-    if (!this.names[name]) return false;
-
-    this.hashes[hash.toString()] = name;
-    return true;
+    return makeTag(this.target, lastEl, this.forceServer, insertBefore, this.getImportRuleTag);
   };
 
-  /* Third type of caching—don't inject components' componentId twice. */
-
-
-  StyleSheet.prototype.hasInjectedComponent = function hasInjectedComponent(componentId) {
-    return !!this.componentTags[componentId];
-  };
-
-  StyleSheet.prototype.deferredInject = function deferredInject(componentId, isLocal, css) {
-    if (this === instance) {
-      clones.forEach(function (clone) {
-        clone.deferredInject(componentId, isLocal, css);
-      });
+  /* get a tag for a given componentId, assign the componentId to one, or shard */
+  StyleSheet.prototype.getTagForId = function getTagForId(id) {
+    /* simply return a tag, when the componentId was already assigned one */
+    var prev = this.tagMap[id];
+    if (prev !== undefined && !this.sealed) {
+      return prev;
     }
 
-    this.getOrCreateTag(componentId, isLocal);
-    this.deferredInjections[componentId] = css;
+    var tag = this.tags[this.tags.length - 1];
+
+    /* shard (create a new tag) if the tag is exhausted (See MAX_SIZE) */
+    this.capacity -= 1;
+    if (this.capacity === 0) {
+      this.capacity = MAX_SIZE;
+      this.sealed = false;
+      tag = this.makeTag(tag);
+      this.tags.push(tag);
+    }
+
+    return this.tagMap[id] = tag;
   };
 
-  StyleSheet.prototype.inject = function inject(componentId, isLocal, css, hash, name) {
-    if (this === instance) {
-      clones.forEach(function (clone) {
-        clone.inject(componentId, isLocal, css);
-      });
+  /* mainly for injectGlobal to check for its id */
+
+
+  StyleSheet.prototype.hasId = function hasId(id) {
+    return this.tagMap[id] !== undefined;
+  };
+
+  /* caching layer checking id+name to already have a corresponding tag and injected rules */
+
+
+  StyleSheet.prototype.hasNameForId = function hasNameForId(id, name) {
+    /* exception for rehydrated names which are checked separately */
+    if (this.ignoreRehydratedNames[id] === undefined && this.rehydratedNames[name]) {
+      return true;
     }
 
-    var tag = this.getOrCreateTag(componentId, isLocal);
+    var tag = this.tagMap[id];
+    return tag !== undefined && tag.hasNameForId(id, name);
+  };
 
-    var deferredInjection = this.deferredInjections[componentId];
-    if (deferredInjection) {
-      tag.inject(componentId, deferredInjection);
-      delete this.deferredInjections[componentId];
+  /* registers a componentId and registers it on its tag */
+
+
+  StyleSheet.prototype.deferredInject = function deferredInject(id, cssRules) {
+    /* don't inject when the id is already registered */
+    if (this.tagMap[id] !== undefined) return;
+
+    var clones = this.clones;
+
+    for (var i = 0; i < clones.length; i += 1) {
+      clones[i].deferredInject(id, cssRules);
     }
 
-    tag.inject(componentId, css, name);
+    this.getTagForId(id).insertMarker(id);
+    this.deferred[id] = cssRules;
+  };
 
-    if (hash && name) {
-      this.hashes[hash.toString()] = name;
+  /* injects rules for a given id with a name that will need to be cached */
+
+
+  StyleSheet.prototype.inject = function inject(id, cssRules, name) {
+    var clones = this.clones;
+
+    for (var i = 0; i < clones.length; i += 1) {
+      clones[i].inject(id, cssRules, name);
     }
+
+    /* add deferred rules for component */
+    var injectRules = cssRules;
+    var deferredRules = this.deferred[id];
+    if (deferredRules !== undefined) {
+      injectRules = deferredRules.concat(injectRules);
+      delete this.deferred[id];
+    }
+
+    var tag = this.getTagForId(id);
+    tag.insertRules(id, injectRules, name);
+  };
+
+  /* removes all rules for a given id, which doesn't remove its marker but resets it */
+
+
+  StyleSheet.prototype.remove = function remove(id) {
+    var tag = this.tagMap[id];
+    if (tag === undefined) return;
+
+    var clones = this.clones;
+
+    for (var i = 0; i < clones.length; i += 1) {
+      clones[i].remove(id);
+    }
+
+    /* remove all rules from the tag */
+    tag.removeRules(id);
+    /* ignore possible rehydrated names */
+    this.ignoreRehydratedNames[id] = true;
+    /* delete possible deferred rules */
+    delete this.deferred[id];
   };
 
   StyleSheet.prototype.toHTML = function toHTML() {
@@ -3009,65 +3325,27 @@ var StyleSheet = function () {
   };
 
   StyleSheet.prototype.toReactElements = function toReactElements() {
+    var id = this.id;
+
+
     return this.tags.map(function (tag, i) {
-      return tag.toReactElement('sc-' + i);
+      var key = 'sc-' + id + '-' + i;
+      return Object(__WEBPACK_IMPORTED_MODULE_3_react__["cloneElement"])(tag.toElement(), { key: key });
     });
   };
 
-  StyleSheet.prototype.getOrCreateTag = function getOrCreateTag(componentId, isLocal) {
-    var existingTag = this.componentTags[componentId];
-
-    /**
-     * in a streaming context, once a tag is sealed it can never be added to again
-     * or those styles will never make it to the client
-     */
-    if (existingTag && this.isStreaming ? !existingTag.isSealed() : existingTag) {
-      return existingTag;
+  createClass(StyleSheet, null, [{
+    key: 'master',
+    get: function get$$1() {
+      return master || (master = new StyleSheet().rehydrate());
     }
 
-    var lastTag = this.tags[this.tags.length - 1];
-    var componentTag = !lastTag || lastTag.isSealed() || lastTag.isLocal !== isLocal ? this.createNewTag(isLocal) : lastTag;
-    this.componentTags[componentId] = componentTag;
-    componentTag.addComponent(componentId);
-    return componentTag;
-  };
+    /* NOTE: This is just for backwards-compatibility with jest-styled-components */
 
-  StyleSheet.prototype.createNewTag = function createNewTag(isLocal) {
-    var newTag = this.tagConstructor(isLocal);
-    this.tags.push(newTag);
-    return newTag;
-  };
-
-  StyleSheet.reset = function reset(isServer) {
-    instance = StyleSheet.create(isServer);
-  };
-
-  /* We can make isServer totally implicit once Jest 20 drops and we
-   * can change environment on a per-test basis. */
-
-
-  StyleSheet.create = function create() {
-    var isServer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !IS_BROWSER;
-
-    return (isServer ? ServerStyleSheet : BrowserStyleSheet).create();
-  };
-
-  StyleSheet.clone = function clone(oldSheet) {
-    var newSheet = new StyleSheet(oldSheet.tagConstructor, oldSheet.tags.map(function (tag) {
-      return tag.clone();
-    }), _extends({}, oldSheet.names));
-
-    newSheet.hashes = _extends({}, oldSheet.hashes);
-    newSheet.deferredInjections = _extends({}, oldSheet.deferredInjections);
-    clones.push(newSheet);
-
-    return newSheet;
-  };
-
-  createClass(StyleSheet, null, [{
+  }, {
     key: 'instance',
     get: function get$$1() {
-      return instance || (instance = StyleSheet.create());
+      return StyleSheet.master;
     }
   }]);
   return StyleSheet;
@@ -3076,6 +3354,9 @@ var StyleSheet = function () {
 var _StyleSheetManager$ch;
 
 // 
+/* this error is used for makeStyleTag */
+var targetPropErr =  true ? '\nThe StyleSheetManager expects a valid target or sheet prop!\n- Does this error occur on the client and is your target falsy?\n- Does this error occur on the server and is the sheet falsy?\n'.trim() : '';
+
 var StyleSheetManager = function (_Component) {
   inherits(StyleSheetManager, _Component);
 
@@ -3087,7 +3368,17 @@ var StyleSheetManager = function (_Component) {
   StyleSheetManager.prototype.getChildContext = function getChildContext() {
     var _ref;
 
-    return _ref = {}, _ref[CONTEXT_KEY] = this.props.sheet, _ref;
+    return _ref = {}, _ref[CONTEXT_KEY] = this.sheetInstance, _ref;
+  };
+
+  StyleSheetManager.prototype.componentWillMount = function componentWillMount() {
+    if (this.props.sheet) {
+      this.sheetInstance = this.props.sheet;
+    } else if (this.props.target) {
+      this.sheetInstance = new StyleSheet(this.props.target);
+    } else {
+      throw new Error(targetPropErr);
+    }
   };
 
   StyleSheetManager.prototype.render = function render() {
@@ -3104,128 +3395,32 @@ var StyleSheetManager = function (_Component) {
 StyleSheetManager.childContextTypes = (_StyleSheetManager$ch = {}, _StyleSheetManager$ch[CONTEXT_KEY] = __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.instanceOf(StyleSheet), __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.instanceOf(ServerStyleSheet)]).isRequired, _StyleSheetManager$ch);
 
  true ? StyleSheetManager.propTypes = {
-  sheet: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.instanceOf(StyleSheet), __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.instanceOf(ServerStyleSheet)]).isRequired
+  sheet: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.instanceOf(StyleSheet), __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.instanceOf(ServerStyleSheet)]),
+  target: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.shape({
+    appendChild: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func.isRequired
+  })
 } : void 0;
 
 // 
 /* eslint-disable no-underscore-dangle */
-var ServerTag = function () {
-  function ServerTag(isLocal) {
-    classCallCheck(this, ServerTag);
+/* this error is used for makeStyleTag */
+var sheetClosedErr =  true ? '\nCan\'t collect styles once you\'ve consumed a ServerStyleSheet\'s styles!\nServerStyleSheet is a one off instance for each server-side render cycle.\n- Are you trying to reuse it across renders?\n- Are you accidentally calling collectStyles twice?\n'.trim() : '';
 
-    this.emitted = false;
-    this.isLocal = isLocal;
-    this.isProduction = "development" === 'production';
-    this.components = {};
-    this.size = 0;
-    this.names = [];
-  }
-
-  ServerTag.prototype.isSealed = function isSealed() {
-    return this.emitted;
-  };
-
-  ServerTag.prototype.getComponentIds = function getComponentIds() {
-    return Object.keys(this.components);
-  };
-
-  ServerTag.prototype.addComponent = function addComponent(componentId) {
-    if (this.components[componentId]) {
-      throw new Error( true ? 'Trying to add Component \'' + componentId + '\' twice!' : '');
-    }
-    this.components[componentId] = { componentId: componentId, css: '' };
-    this.size += 1;
-  };
-
-  ServerTag.prototype.concatenateCSS = function concatenateCSS() {
-    var _this = this;
-
-    return Object.keys(this.components).reduce(function (styles, k) {
-      return styles + _this.components[k].css;
-    }, '');
-  };
-
-  ServerTag.prototype.inject = function inject(componentId, css, name) {
-    var comp = this.components[componentId];
-
-    if (!comp) {
-      throw new Error( true ? 'Must add a new component before you can inject css into it' : '');
-    }
-
-    if (comp.css === '') {
-      comp.css = '/* sc-component-id: ' + componentId + ' */\n';
-    }
-
-    var cssRulesSize = css.length;
-    for (var i = 0; i < cssRulesSize; i += 1) {
-      var cssRule = css[i];
-      comp.css += (cssRule + '\n').replace(/\n*$/, '\n');
-    }
-
-    if (name) this.names.push(name);
-  };
-
-  ServerTag.prototype.toHTML = function toHTML() {
-    var attrs = ['type="text/css"', SC_ATTR + '="' + this.names.join(' ') + '"', LOCAL_ATTR + '="' + (this.isLocal ? 'true' : 'false') + '"'];
-
-    var nonce = getNonce();
-    if (nonce) {
-      attrs.push('nonce="' + nonce + '"');
-    }
-
-    this.emitted = true;
-    return '<style ' + attrs.join(' ') + '>' + this.concatenateCSS() + '</style>';
-  };
-
-  ServerTag.prototype.toReactElement = function toReactElement(key) {
-    var _attrs;
-
-    var attrs = (_attrs = {}, _attrs[SC_ATTR] = this.names.join(' '), _attrs[LOCAL_ATTR] = this.isLocal.toString(), _attrs);
-
-    var nonce = getNonce();
-    if (nonce) {
-      attrs.nonce = nonce;
-    }
-
-    this.emitted = true;
-
-    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('style', _extends({
-      key: key,
-      type: 'text/css'
-    }, attrs, {
-      dangerouslySetInnerHTML: { __html: this.concatenateCSS() }
-    }));
-  };
-
-  ServerTag.prototype.clone = function clone() {
-    var _this2 = this;
-
-    var copy = new ServerTag(this.isLocal);
-    copy.names = [].concat(this.names);
-    copy.size = this.size;
-    copy.components = Object.keys(this.components).reduce(function (acc, key) {
-      acc[key] = _extends({}, _this2.components[key]); // eslint-disable-line no-param-reassign
-      return acc;
-    }, {});
-
-    return copy;
-  };
-
-  return ServerTag;
-}();
+var streamBrowserErr =  true ? 'Streaming SSR is only supported in a Node.js environment; Please do not try to call this method in the browser.' : '';
 
 var ServerStyleSheet = function () {
   function ServerStyleSheet() {
     classCallCheck(this, ServerStyleSheet);
 
-    this.instance = StyleSheet.clone(StyleSheet.instance);
-    this.instance.isStreaming = false;
+    this.instance = StyleSheet.master.clone();
+    this.closed = false;
   }
 
   ServerStyleSheet.prototype.collectStyles = function collectStyles(children) {
     if (this.closed) {
-      throw new Error( true ? "Can't collect styles once you've called getStyleTags!" : '');
+      throw new Error(sheetClosedErr);
     }
+
     return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
       StyleSheetManager,
       { sheet: this.instance },
@@ -3233,14 +3428,9 @@ var ServerStyleSheet = function () {
     );
   };
 
-  ServerStyleSheet.prototype.close = function close() {
-    clones.splice(clones.indexOf(this.instance), 1);
-    this.closed = true;
-  };
-
   ServerStyleSheet.prototype.getStyleTags = function getStyleTags() {
     if (!this.closed) {
-      this.close();
+      this.closed = true;
     }
 
     return this.instance.toHTML();
@@ -3248,22 +3438,57 @@ var ServerStyleSheet = function () {
 
   ServerStyleSheet.prototype.getStyleElement = function getStyleElement() {
     if (!this.closed) {
-      this.close();
+      this.closed = true;
     }
 
     return this.instance.toReactElements();
   };
 
   ServerStyleSheet.prototype.interleaveWithNodeStream = function interleaveWithNodeStream(readableStream) {
-    {
-      throw new Error( true ? 'streaming only works in Node.js, please do not try to call this method in the browser' : '');
-    }
-  };
+    var _this = this;
 
-  ServerStyleSheet.create = function create() {
-    return new StyleSheet(function (isLocal) {
-      return new ServerTag(isLocal);
+    {
+      throw new Error(streamBrowserErr);
+    }
+
+    /* the tag index keeps track of which tags have already been emitted */
+    var instance = this.instance;
+
+    var instanceTagIndex = 0;
+
+    var streamAttr = SC_STREAM_ATTR + '="true"';
+    var ourStream = new stream.Readable();
+    // $FlowFixMe
+    ourStream._read = function () {};
+
+    readableStream.on('data', function (chunk) {
+      var tags = instance.tags;
+
+      var html = '';
+
+      /* retrieve html for each new style tag */
+      for (; instanceTagIndex < tags.length; instanceTagIndex += 1) {
+        var tag = tags[instanceTagIndex];
+        html += tag.toHTML(streamAttr);
+      }
+
+      /* force our StyleSheets to emit entirely new tags */
+      instance.sealAllTags();
+      /* prepend style html to chunk */
+      ourStream.push(html + chunk);
     });
+
+    readableStream.on('end', function () {
+      _this.closed = true;
+      ourStream.push(null);
+    });
+
+    readableStream.on('error', function (err) {
+      _this.closed = true;
+      ourStream.emit('error', err);
+    });
+
+    return ourStream;
   };
 
   return ServerStyleSheet;
@@ -3305,11 +3530,11 @@ var createWarnTooManyClasses = (function (displayName) {
  *    and no false positives from partials
  **/
 /*
-children dangerouslySetInnerHTML key ref autoFocus defaultValue valueLink defaultChecked checkedLink innerHTML suppressContentEditableWarning onFocusIn onFocusOut className onCopy onCut onPaste onCompositionEnd onCompositionStart onCompositionUpdate onKeyDown onKeyPress onKeyUp onFocus onBlur onChange onInput onSubmit onReset onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onSelect onTouchCancel onTouchEnd onTouchMove onTouchStart onScroll onWheel onAbort onCanPlay onCanPlayThrough onDurationChange onEmptied onEncrypted onEnded onError onLoadedData onLoadedMetadata onLoadStart onPause onPlay onPlaying onProgress onRateChange onSeeked onSeeking onStalled onSuspend onTimeUpdate onVolumeChange onWaiting onLoad onAnimationStart onAnimationEnd onAnimationIteration onTransitionEnd onCopyCapture onCutCapture onPasteCapture onCompositionEndCapture onCompositionStartCapture onCompositionUpdateCapture onKeyDownCapture onKeyPressCapture onKeyUpCapture onFocusCapture onBlurCapture onChangeCapture onInputCapture onSubmitCapture onResetCapture onClickCapture onContextMenuCapture onDoubleClickCapture onDragCapture onDragEndCapture onDragEnterCapture onDragExitCapture onDragLeaveCapture onDragOverCapture onDragStartCapture onDropCapture onMouseDownCapture onMouseEnterCapture onMouseLeaveCapture onMouseMoveCapture onMouseOutCapture onMouseOverCapture onMouseUpCapture onSelectCapture onTouchCancelCapture onTouchEndCapture onTouchMoveCapture onTouchStartCapture onScrollCapture onWheelCapture onAbortCapture onCanPlayCapture onCanPlayThroughCapture onDurationChangeCapture onEmptiedCapture onEncryptedCapture onEndedCapture onErrorCapture onLoadedDataCapture onLoadedMetadataCapture onLoadStartCapture onPauseCapture onPlayCapture onPlayingCapture onProgressCapture onRateChangeCapture onSeekedCapture onSeekingCapture onStalledCapture onSuspendCapture onTimeUpdateCapture onVolumeChangeCapture onWaitingCapture onLoadCapture onAnimationStartCapture onAnimationEndCapture onAnimationIterationCapture onTransitionEndCapture accept acceptCharset accessKey action allowFullScreen allowTransparency alt as async autoComplete autoPlay capture cellPadding cellSpacing charSet challenge checked cite classID className cols colSpan content contentEditable contextMenu controls coords crossOrigin data dateTime default defer dir disabled download draggable encType form formAction formEncType formMethod formNoValidate formTarget frameBorder headers height hidden high href hrefLang htmlFor httpEquiv icon id inputMode integrity is keyParams keyType kind label lang list loop low manifest marginHeight marginWidth max maxLength media mediaGroup method min minLength multiple muted name nonce noValidate open optimum pattern placeholder playsInline poster preload profile radioGroup readOnly referrerPolicy rel required reversed role rows rowSpan sandbox scope scoped scrolling seamless selected shape size sizes span spellCheck src srcDoc srcLang srcSet start step style summary tabIndex target title type useMap value width wmode wrap about datatype inlist prefix property resource typeof vocab autoCapitalize autoCorrect autoSave color itemProp itemScope itemType itemID itemRef results security unselectable accentHeight accumulate additive alignmentBaseline allowReorder alphabetic amplitude arabicForm ascent attributeName attributeType autoReverse azimuth baseFrequency baseProfile baselineShift bbox begin bias by calcMode capHeight clip clipPath clipRule clipPathUnits colorInterpolation colorInterpolationFilters colorProfile colorRendering contentScriptType contentStyleType cursor cx cy d decelerate descent diffuseConstant direction display divisor dominantBaseline dur dx dy edgeMode elevation enableBackground end exponent externalResourcesRequired fill fillOpacity fillRule filter filterRes filterUnits floodColor floodOpacity focusable fontFamily fontSize fontSizeAdjust fontStretch fontStyle fontVariant fontWeight format from fx fy g1 g2 glyphName glyphOrientationHorizontal glyphOrientationVertical glyphRef gradientTransform gradientUnits hanging horizAdvX horizOriginX ideographic imageRendering in in2 intercept k k1 k2 k3 k4 kernelMatrix kernelUnitLength kerning keyPoints keySplines keyTimes lengthAdjust letterSpacing lightingColor limitingConeAngle local markerEnd markerMid markerStart markerHeight markerUnits markerWidth mask maskContentUnits maskUnits mathematical mode numOctaves offset opacity operator order orient orientation origin overflow overlinePosition overlineThickness paintOrder panose1 pathLength patternContentUnits patternTransform patternUnits pointerEvents points pointsAtX pointsAtY pointsAtZ preserveAlpha preserveAspectRatio primitiveUnits r radius refX refY renderingIntent repeatCount repeatDur requiredExtensions requiredFeatures restart result rotate rx ry scale seed shapeRendering slope spacing specularConstant specularExponent speed spreadMethod startOffset stdDeviation stemh stemv stitchTiles stopColor stopOpacity strikethroughPosition strikethroughThickness string stroke strokeDasharray strokeDashoffset strokeLinecap strokeLinejoin strokeMiterlimit strokeOpacity strokeWidth surfaceScale systemLanguage tableValues targetX targetY textAnchor textDecoration textRendering textLength to transform u1 u2 underlinePosition underlineThickness unicode unicodeBidi unicodeRange unitsPerEm vAlphabetic vHanging vIdeographic vMathematical values vectorEffect version vertAdvY vertOriginX vertOriginY viewBox viewTarget visibility widths wordSpacing writingMode x xHeight x1 x2 xChannelSelector xlinkActuate xlinkArcrole xlinkHref xlinkRole xlinkShow xlinkTitle xlinkType xmlBase xmlns xmlnsXlink xmlLang xmlSpace y y1 y2 yChannelSelector z zoomAndPan
+children dangerouslySetInnerHTML key ref autoFocus defaultValue valueLink defaultChecked checkedLink innerHTML suppressContentEditableWarning onFocusIn onFocusOut className onCopy onCut onPaste onCompositionEnd onCompositionStart onCompositionUpdate onKeyDown onKeyPress onKeyUp onFocus onBlur onChange onInput onSubmit onReset onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onSelect onTouchCancel onTouchEnd onTouchMove onTouchStart onScroll onWheel onAbort onCanPlay onCanPlayThrough onDurationChange onEmptied onEncrypted onEnded onError onLoadedData onLoadedMetadata onLoadStart onPause onPlay onPlaying onProgress onRateChange onSeeked onSeeking onStalled onSuspend onTimeUpdate onVolumeChange onWaiting onLoad onAnimationStart onAnimationEnd onAnimationIteration onTransitionEnd onCopyCapture onCutCapture onPasteCapture onCompositionEndCapture onCompositionStartCapture onCompositionUpdateCapture onKeyDownCapture onKeyPressCapture onKeyUpCapture onFocusCapture onBlurCapture onChangeCapture onInputCapture onSubmitCapture onResetCapture onClickCapture onContextMenuCapture onDoubleClickCapture onDragCapture onDragEndCapture onDragEnterCapture onDragExitCapture onDragLeaveCapture onDragOverCapture onDragStartCapture onDropCapture onMouseDownCapture onMouseEnterCapture onMouseLeaveCapture onMouseMoveCapture onMouseOutCapture onMouseOverCapture onMouseUpCapture onSelectCapture onTouchCancelCapture onTouchEndCapture onTouchMoveCapture onTouchStartCapture onScrollCapture onWheelCapture onAbortCapture onCanPlayCapture onCanPlayThroughCapture onDurationChangeCapture onEmptiedCapture onEncryptedCapture onEndedCapture onErrorCapture onLoadedDataCapture onLoadedMetadataCapture onLoadStartCapture onPauseCapture onPlayCapture onPlayingCapture onProgressCapture onRateChangeCapture onSeekedCapture onSeekingCapture onStalledCapture onSuspendCapture onTimeUpdateCapture onVolumeChangeCapture onWaitingCapture onLoadCapture onAnimationStartCapture onAnimationEndCapture onAnimationIterationCapture onTransitionEndCapture accept acceptCharset accessKey action allowFullScreen allowTransparency alt as async autoComplete autoPlay capture cellPadding cellSpacing charSet challenge checked cite classID className cols colSpan content contentEditable contextMenu controlsList controls coords crossOrigin data dateTime default defer dir disabled download draggable encType form formAction formEncType formMethod formNoValidate formTarget frameBorder headers height hidden high href hrefLang htmlFor httpEquiv icon id inputMode integrity is keyParams keyType kind label lang list loop low manifest marginHeight marginWidth max maxLength media mediaGroup method min minLength multiple muted name nonce noValidate open optimum pattern placeholder playsInline poster preload profile radioGroup readOnly referrerPolicy rel required reversed role rows rowSpan sandbox scope scoped scrolling seamless selected shape size sizes span spellCheck src srcDoc srcLang srcSet start step style summary tabIndex target title type useMap value width wmode wrap about datatype inlist prefix property resource typeof vocab autoCapitalize autoCorrect autoSave color itemProp itemScope itemType itemID itemRef results security unselectable accentHeight accumulate additive alignmentBaseline allowReorder alphabetic amplitude arabicForm ascent attributeName attributeType autoReverse azimuth baseFrequency baseProfile baselineShift bbox begin bias by calcMode capHeight clip clipPath clipRule clipPathUnits colorInterpolation colorInterpolationFilters colorProfile colorRendering contentScriptType contentStyleType cursor cx cy d decelerate descent diffuseConstant direction display divisor dominantBaseline dur dx dy edgeMode elevation enableBackground end exponent externalResourcesRequired fill fillOpacity fillRule filter filterRes filterUnits floodColor floodOpacity focusable fontFamily fontSize fontSizeAdjust fontStretch fontStyle fontVariant fontWeight format from fx fy g1 g2 glyphName glyphOrientationHorizontal glyphOrientationVertical glyphRef gradientTransform gradientUnits hanging horizAdvX horizOriginX ideographic imageRendering in in2 intercept k k1 k2 k3 k4 kernelMatrix kernelUnitLength kerning keyPoints keySplines keyTimes lengthAdjust letterSpacing lightingColor limitingConeAngle local markerEnd markerMid markerStart markerHeight markerUnits markerWidth mask maskContentUnits maskUnits mathematical mode numOctaves offset opacity operator order orient orientation origin overflow overlinePosition overlineThickness paintOrder panose1 pathLength patternContentUnits patternTransform patternUnits pointerEvents points pointsAtX pointsAtY pointsAtZ preserveAlpha preserveAspectRatio primitiveUnits r radius refX refY renderingIntent repeatCount repeatDur requiredExtensions requiredFeatures restart result rotate rx ry scale seed shapeRendering slope spacing specularConstant specularExponent speed spreadMethod startOffset stdDeviation stemh stemv stitchTiles stopColor stopOpacity strikethroughPosition strikethroughThickness string stroke strokeDasharray strokeDashoffset strokeLinecap strokeLinejoin strokeMiterlimit strokeOpacity strokeWidth surfaceScale systemLanguage tableValues targetX targetY textAnchor textDecoration textRendering textLength to transform u1 u2 underlinePosition underlineThickness unicode unicodeBidi unicodeRange unitsPerEm vAlphabetic vHanging vIdeographic vMathematical values vectorEffect version vertAdvY vertOriginX vertOriginY viewBox viewTarget visibility widths wordSpacing writingMode x xHeight x1 x2 xChannelSelector xlinkActuate xlinkArcrole xlinkHref xlinkRole xlinkShow xlinkTitle xlinkType xmlBase xmlns xmlnsXlink xmlLang xmlSpace y y1 y2 yChannelSelector z zoomAndPan
 */
 /* eslint-enable max-len */
 
-var ATTRIBUTE_REGEX = /^((?:s(?:uppressContentEditableWarn|croll|pac)|(?:shape|image|text)Render|(?:letter|word)Spac|vHang|hang)ing|(?:on(?:AnimationIteration|C(?:o(?:mposition(?:Update|Start|End)|ntextMenu|py)|anPlayThrough|anPlay|hange|lick|ut)|(?:(?:Duration|Volume|Rate)Chang|(?:MouseLea|(?:Touch|Mouse)Mo|DragLea)v|Paus)e|Loaded(?:Metad|D)ata|(?:Animation|Touch|Load|Drag)Start|(?:(?:T(?:ransition|ouch)|Animation)E|Suspe)nd|DoubleClick|(?:TouchCanc|Whe)el|(?:Mouse(?:Ent|Ov)e|Drag(?:Ent|Ov)e|Erro)r|TimeUpdate|(?:E(?:n(?:crypt|d)|mpti)|S(?:tall|eek))ed|MouseDown|P(?:rogress|laying)|(?:MouseOu|DragExi|S(?:elec|ubmi)|Rese|Inpu)t|KeyPress|DragEnd|Key(?:Down|Up)|(?:Wait|Seek)ing|(?:MouseU|Dro)p|Scroll|Paste|Focus|Abort|Drag|Play|Load|Blur)Captur|alignmentBaselin|(?:limitingConeAng|xlink(?:(?:Arcr|R)o|Tit)|s(?:urfaceSca|ty|ca)|unselectab|baseProfi|fontSty|(?:focus|dragg)ab|multip|profi|tit)l|d(?:ominantBaselin|efaultValu)|a(?:uto(?:Capitaliz|Revers|Sav)|dditiv)|(?:(?:formNoValid|xlinkActu|noValid|accumul|rot)a|autoComple|decelera)t|(?:(?:attribute|item)T|datat)yp|(?:attribute|glyph)Nam|playsInlin|(?:formE|e)ncTyp|(?:writing|input|edge)Mod|(?:xlinkTy|itemSco|keyTy|slo)p|(?:amplitu|mo)d|(?:xmlSpa|non)c|fillRul|(?:dateTi|na)m|r(?:esourc|ol)|xmlBas|wmod)e|(?:glyphOrientationHorizont|loc)al|(?:externalResourcesRequir|select|revers|mut)ed|c(?:o(?:lorInterpolationFilter|ntrol|ord)s|o(?:lor(?:Interpolation)?|ntent)|(?:ontentS(?:cript|tyle)Typ|o(?:ntentEditab|lorProfi)l|l(?:assNam|ipRul)|a(?:lcMod|ptur)|it)e|olorRendering|l(?:ipPathUnits|assID)|o(?:ntextMenu|ls)|h(?:eckedLink|a(?:llenge|rSet)|ildren|ecked)|ell(?:Spac|Padd)ing|(?:rossOrigi|olSpa)n|apHeight|lip(?:Path)?|ursor|[xy])|glyphOrientationVertical|d(?:angerouslySetInnerHTML|efaultChecked|ownload|isabled|isplay|[xy])|(?:s(?:trikethroughThickn|eaml)es|(?:und|ov)erlineThicknes|r(?:equiredExtension|adiu)|(?:requiredFeatur|tableValu|stitchTil|numOctav|filterR)e|key(?:(?:Splin|Tim)e|Param)|autoFocu|header|bia)s|(?:(?:st(?:rikethroughPosi|dDevia)|(?:und|ov)erlinePosi|(?:textDecor|elev)a|orienta)tio|(?:strokeLinejo|orig)i|formActio|zoomAndPa|onFocusI|directio|(?:vers|act)io|rowSpa|begi|ico)n|o(?:n(?:AnimationIteration|C(?:o(?:mposition(?:Update|Start|End)|ntextMenu|py)|anPlayThrough|anPlay|hange|lick|ut)|(?:(?:Duration|Volume|Rate)Chang|(?:MouseLea|(?:Touch|Mouse)Mo|DragLea)v|Paus)e|Loaded(?:Metad|D)ata|(?:Animation|Touch|Load|Drag)Start|(?:(?:T(?:ransition|ouch)|Animation)E|Suspe)nd|DoubleClick|(?:TouchCanc|Whe)el|(?:Mouse(?:Ent|Ov)e|Drag(?:Ent|Ov)e|Erro)r|TimeUpdate|(?:E(?:n(?:crypt|d)|mpti)|S(?:tall|eek))ed|MouseDown|P(?:rogress|laying)|(?:MouseOu|DragExi|S(?:elec|ubmi)|Rese|Inpu)t|KeyPress|DragEnd|Key(?:Down|Up)|(?:Wait|Seek)ing|(?:MouseU|Dro)p|Scroll|Paste|Focus|Abort|Drag|Play|Load|Blur)|rient)|p(?:reserveA(?:spectRatio|lpha)|ointsAt[X-Z]|anose1)|(?:patternContent|ma(?:sk(?:Content)?|rker)|primitive|gradient|pattern|filter)Units|(?:gradientT|patternT|t)ransform|(?:(?:allowTranspar|baseFrequ)enc|re(?:ferrerPolic|adOnl)|(?:(?:st(?:roke|op)O|floodO|fillO|o)pac|integr|secur)it|visibilit|fontFamil|accessKe|propert|summar)y|(?:strokeMiterlimi|(?:specularConsta|repeatCou|fontVaria)n|(?:(?:specularE|e)xpon|renderingInt|asc)en|d(?:iffuseConsta|esce)n|(?:fontSizeAdju|lengthAdju|manife)s|baselineShif|vectorEffec|(?:(?:mar(?:ker|gin)|x)H|accentH|fontW)eigh|a(?:utoCorrec|bou)|markerStar|onFocusOu|in(?:tercep|lis)|restar|forma|heigh|lis)t|(?:(?:st(?:rokeDasho|artO)|o)ffs|acceptChars|formTarg|viewTarg|srcS)et|(?:(?:enableBackgrou|markerE)n|s(?:p(?:readMetho|ee)|ee)|formMetho|m(?:arkerMi|etho)|preloa|kin)d|k(?:ernel(?:UnitLength|Matrix)|[1-4])|(?:[xy]ChannelSelect|lightingCol|textAnch|floodCol|stopCol|operat|htmlF)or|(?:allowFullScre|hidd)en|strokeDasharray|systemLanguage|(?:strokeLineca|itemPro|useMa|wra|loo)p|v(?:Mathematical|ert(?:Origin[XY]|AdvY)|alues|ocab)|(?:pointerEve|keyPoi)nts|unicodeRange|(?:(?:allowReord|placehold|frameBord|paintOrd|post|ord)e|repeatDu|d(?:efe|u))r|mathematical|(?:vI|i)deographic|h(?:oriz(?:Origin|Adv)X|ttpEquiv)|u(?:nicodeBidi|[12])|(?:fontStretc|hig)h|(?:(?:mar(?:ker|gin)W|strokeW)id|azimu)th|vAlphabetic|mediaGroup|spellCheck|(?:unitsPerE|optimu|fro)m|r(?:adioGroup|e(?:sults|f[XY]|l)|ows|[xy])|(?:xmlnsXl|valueL)ink|a(?:rabicForm|l(?:phabetic|t)|sync)|pathLength|(?:text|m(?:in|ax))Length|innerHTML|xlinkShow|(?:xlinkHr|glyphR)ef|r(?:e(?:quired|sult|f))?|o(?:verflow|pen)|(?:tabInde|(?:sand|b)bo|viewBo)x|(?:(?:href|xml|src)La|kerni)ng|f(?:o(?:ntSize|rm)|il(?:ter|l))|autoPlay|unicode|p(?:attern|oints)|t(?:arget[XY]|o)|i(?:temRef|n2|s)|divisor|d(?:efault|ata|ir)?|srcDoc|s(?:coped|te(?:m[hv]|p)|pan)|(?:width|size)s|(?:stri|la)ng|prefix|itemID|s(?:t(?:roke|art)|hape|cope|rc)|a(?:ccept|s)|t(?:arget|ype)|typeof|width|value|x(?:mlns)?|label|m(?:edia|a(?:sk|x)|in)|size|href|k(?:ey)?|end|low|x[12]|i[dn]|y[12]|g[12]|by|f[xy]|[yz])$/;
+var ATTRIBUTE_REGEX = /^((?:s(?:uppressContentEditableWarn|croll|pac)|(?:shape|image|text)Render|(?:letter|word)Spac|vHang|hang)ing|(?:on(?:AnimationIteration|C(?:o(?:mposition(?:Update|Start|End)|ntextMenu|py)|anPlayThrough|anPlay|hange|lick|ut)|(?:(?:Duration|Volume|Rate)Chang|(?:MouseLea|(?:Touch|Mouse)Mo|DragLea)v|Paus)e|Loaded(?:Metad|D)ata|(?:Animation|Touch|Load|Drag)Start|(?:(?:T(?:ransition|ouch)|Animation)E|Suspe)nd|DoubleClick|(?:TouchCanc|Whe)el|(?:Mouse(?:Ent|Ov)e|Drag(?:Ent|Ov)e|Erro)r|TimeUpdate|(?:E(?:n(?:crypt|d)|mpti)|S(?:tall|eek))ed|MouseDown|P(?:rogress|laying)|(?:MouseOu|DragExi|S(?:elec|ubmi)|Rese|Inpu)t|KeyPress|DragEnd|Key(?:Down|Up)|(?:Wait|Seek)ing|(?:MouseU|Dro)p|Scroll|Paste|Focus|Abort|Drag|Play|Load|Blur)Captur|alignmentBaselin|(?:limitingConeAng|xlink(?:(?:Arcr|R)o|Tit)|s(?:urfaceSca|ty|ca)|unselectab|baseProfi|fontSty|(?:focus|dragg)ab|multip|profi|tit)l|d(?:ominantBaselin|efaultValu)|a(?:uto(?:Capitaliz|Revers|Sav)|dditiv)|(?:(?:formNoValid|xlinkActu|noValid|accumul|rot)a|autoComple|decelera)t|(?:(?:attribute|item)T|datat)yp|(?:attribute|glyph)Nam|playsInlin|(?:formE|e)ncTyp|(?:writing|input|edge)Mod|(?:xlinkTy|itemSco|keyTy|slo)p|(?:amplitu|mo)d|(?:xmlSpa|non)c|fillRul|(?:dateTi|na)m|r(?:esourc|ol)|xmlBas|wmod)e|(?:glyphOrientationHorizont|loc)al|(?:externalResourcesRequir|select|revers|mut)ed|c(?:o(?:lorInterpolationFilter|ord)s|o(?:lor(?:Interpolation)?|nt(?:rols|ent))|(?:ontentS(?:cript|tyle)Typ|o(?:ntentEditab|lorProfi)l|l(?:assNam|ipRul)|a(?:lcMod|ptur)|it)e|olorRendering|l(?:ipPathUnits|assID)|(?:ontrolsLis|apHeigh)t|h(?:eckedLink|a(?:llenge|rSet)|ildren|ecked)|ell(?:Spac|Padd)ing|o(?:ntextMenu|ls)|(?:rossOrigi|olSpa)n|lip(?:Path)?|ursor|[xy])|glyphOrientationVertical|d(?:angerouslySetInnerHTML|efaultChecked|ownload|isabled|isplay|[xy])|(?:s(?:trikethroughThickn|eaml)es|(?:und|ov)erlineThicknes|r(?:equiredExtension|adiu)|(?:requiredFeatur|tableValu|stitchTil|numOctav|filterR)e|key(?:(?:Splin|Tim)e|Param)|autoFocu|header|bia)s|(?:(?:st(?:rikethroughPosi|dDevia)|(?:und|ov)erlinePosi|(?:textDecor|elev)a|orienta)tio|(?:strokeLinejo|orig)i|formActio|zoomAndPa|onFocusI|directio|(?:vers|act)io|rowSpa|begi|ico)n|o(?:n(?:AnimationIteration|C(?:o(?:mposition(?:Update|Start|End)|ntextMenu|py)|anPlayThrough|anPlay|hange|lick|ut)|(?:(?:Duration|Volume|Rate)Chang|(?:MouseLea|(?:Touch|Mouse)Mo|DragLea)v|Paus)e|Loaded(?:Metad|D)ata|(?:Animation|Touch|Load|Drag)Start|(?:(?:T(?:ransition|ouch)|Animation)E|Suspe)nd|DoubleClick|(?:TouchCanc|Whe)el|(?:Mouse(?:Ent|Ov)e|Drag(?:Ent|Ov)e|Erro)r|TimeUpdate|(?:E(?:n(?:crypt|d)|mpti)|S(?:tall|eek))ed|MouseDown|P(?:rogress|laying)|(?:MouseOu|DragExi|S(?:elec|ubmi)|Rese|Inpu)t|KeyPress|DragEnd|Key(?:Down|Up)|(?:Wait|Seek)ing|(?:MouseU|Dro)p|Scroll|Paste|Focus|Abort|Drag|Play|Load|Blur)|rient)|p(?:reserveA(?:spectRatio|lpha)|ointsAt[X-Z]|anose1)|(?:patternContent|ma(?:sk(?:Content)?|rker)|primitive|gradient|pattern|filter)Units|(?:gradientT|patternT|t)ransform|(?:(?:allowTranspar|baseFrequ)enc|re(?:ferrerPolic|adOnl)|(?:(?:st(?:roke|op)O|floodO|fillO|o)pac|integr|secur)it|visibilit|fontFamil|accessKe|propert|summar)y|(?:strokeMiterlimi|(?:specularConsta|repeatCou|fontVaria)n|(?:(?:specularE|e)xpon|renderingInt|asc)en|d(?:iffuseConsta|esce)n|(?:fontSizeAdju|lengthAdju|manife)s|baselineShif|vectorEffec|(?:(?:mar(?:ker|gin)|x)H|accentH|fontW)eigh|a(?:utoCorrec|bou)|markerStar|onFocusOu|intercep|restar|forma|inlis|heigh|lis)t|(?:(?:st(?:rokeDasho|artO)|o)ffs|acceptChars|formTarg|viewTarg|srcS)et|(?:(?:enableBackgrou|markerE)n|s(?:p(?:readMetho|ee)|ee)|formMetho|m(?:arkerMi|etho)|preloa|kin)d|k(?:ernel(?:UnitLength|Matrix)|[1-4])|(?:[xy]ChannelSelect|lightingCol|textAnch|floodCol|stopCol|operat|htmlF)or|(?:allowFullScre|hidd)en|strokeDasharray|systemLanguage|(?:strokeLineca|itemPro|useMa|wra|loo)p|v(?:Mathematical|ert(?:Origin[XY]|AdvY)|alues|ocab)|(?:pointerEve|keyPoi)nts|unicodeRange|(?:(?:allowReord|placehold|frameBord|paintOrd|post|ord)e|repeatDu|d(?:efe|u))r|mathematical|(?:vI|i)deographic|h(?:oriz(?:Origin|Adv)X|ttpEquiv)|u(?:nicodeBidi|[12])|(?:fontStretc|hig)h|(?:(?:mar(?:ker|gin)W|strokeW)id|azimu)th|vAlphabetic|mediaGroup|spellCheck|(?:unitsPerE|optimu|fro)m|r(?:adioGroup|e(?:sults|f[XY]|l)|ows|[xy])|(?:xmlnsXl|valueL)ink|a(?:rabicForm|l(?:phabetic|t)|sync)|pathLength|(?:text|m(?:in|ax))Length|innerHTML|xlinkShow|(?:xlinkHr|glyphR)ef|r(?:e(?:quired|sult|f))?|o(?:verflow|pen)|(?:tabInde|(?:sand|b)bo|viewBo)x|(?:(?:href|xml|src)La|kerni)ng|f(?:o(?:ntSize|rm)|il(?:ter|l))|autoPlay|unicode|p(?:attern|oints)|t(?:arget[XY]|o)|i(?:temRef|n2|s)|divisor|d(?:efault|ata|ir)?|srcDoc|s(?:coped|te(?:m[hv]|p)|pan)|(?:width|size)s|(?:stri|la)ng|prefix|itemID|s(?:t(?:roke|art)|hape|cope|rc)|a(?:ccept|s)|t(?:arget|ype)|typeof|width|value|x(?:mlns)?|label|m(?:edia|a(?:sk|x)|in)|size|href|k(?:ey)?|end|low|x[12]|i[dn]|y[12]|g[12]|by|f[xy]|[yz])$/;
 
 /* From DOMProperty */
 var ATTRIBUTE_NAME_START_CHAR = ':A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD';
@@ -3405,19 +3630,6 @@ var createBroadcast = function createBroadcast(initialState) {
 
   return { publish: publish, subscribe: subscribe, unsubscribe: unsubscribe };
 };
-
-// 
-// Helper to call a given function, only once
-var once = (function (cb) {
-  var called = false;
-
-  return function () {
-    if (!called) {
-      called = true;
-      cb();
-    }
-  };
-});
 
 var _ThemeProvider$childC;
 var _ThemeProvider$contex;
@@ -3631,7 +3843,7 @@ var _StyledComponent = (function (ComponentStyle, constructWithOptions) {
           componentStyle = _constructor.componentStyle,
           warnTooManyClasses = _constructor.warnTooManyClasses;
 
-      var styleSheet = this.context[CONTEXT_KEY] || StyleSheet.instance;
+      var styleSheet = this.context[CONTEXT_KEY] || StyleSheet.master;
 
       // staticaly styled-components don't need to build an execution context object,
       // and shouldn't be increasing the number of class names
@@ -3829,72 +4041,46 @@ var _StyledComponent = (function (ComponentStyle, constructWithOptions) {
   return createStyledComponent;
 });
 
-// murmurhash2 via https://gist.github.com/raycmorgan/588423
+// Source: https://github.com/garycourt/murmurhash-js/blob/master/murmurhash2_gc.js
+function murmurhash(str) {
+  var l = str.length | 0,
+      h = l | 0,
+      i = 0,
+      k;
 
-function doHash(str, seed) {
-  var m = 0x5bd1e995;
-  var r = 24;
-  var h = seed ^ str.length;
-  var length = str.length;
-  var currentIndex = 0;
+  while (l >= 4) {
+    k = str.charCodeAt(i) & 0xff | (str.charCodeAt(++i) & 0xff) << 8 | (str.charCodeAt(++i) & 0xff) << 16 | (str.charCodeAt(++i) & 0xff) << 24;
 
-  while (length >= 4) {
-    var k = UInt32(str, currentIndex);
+    k = (k & 0xffff) * 0x5bd1e995 + (((k >>> 16) * 0x5bd1e995 & 0xffff) << 16);
+    k ^= k >>> 24;
+    k = (k & 0xffff) * 0x5bd1e995 + (((k >>> 16) * 0x5bd1e995 & 0xffff) << 16);
 
-    k = Umul32(k, m);
-    k ^= k >>> r;
-    k = Umul32(k, m);
+    h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16) ^ k;
 
-    h = Umul32(h, m);
-    h ^= k;
-
-    currentIndex += 4;
-    length -= 4;
+    l -= 4;
+    ++i;
   }
 
-  switch (length) {
+  switch (l) {
     case 3:
-      h ^= UInt16(str, currentIndex);
-      h ^= str.charCodeAt(currentIndex + 2) << 16;
-      h = Umul32(h, m);
-      break;
-
+      h ^= (str.charCodeAt(i + 2) & 0xff) << 16;
     case 2:
-      h ^= UInt16(str, currentIndex);
-      h = Umul32(h, m);
-      break;
-
+      h ^= (str.charCodeAt(i + 1) & 0xff) << 8;
     case 1:
-      h ^= str.charCodeAt(currentIndex);
-      h = Umul32(h, m);
-      break;
+      h ^= str.charCodeAt(i) & 0xff;
+      h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16);
   }
 
   h ^= h >>> 13;
-  h = Umul32(h, m);
+  h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16);
   h ^= h >>> 15;
 
   return h >>> 0;
 }
 
-function UInt32(str, pos) {
-  return str.charCodeAt(pos++) + (str.charCodeAt(pos++) << 8) + (str.charCodeAt(pos++) << 16) + (str.charCodeAt(pos) << 24);
-}
-
-function UInt16(str, pos) {
-  return str.charCodeAt(pos++) + (str.charCodeAt(pos++) << 8);
-}
-
-function Umul32(n, m) {
-  n = n | 0;
-  m = m | 0;
-  var nlo = n & 0xffff;
-  var nhi = n >>> 16;
-  var res = nlo * m + ((nhi * m & 0xffff) << 16) | 0;
-  return res;
-}
-
 // 
+var areStylesCacheable = IS_BROWSER;
+
 var isStaticRules = function isStaticRules(rules, attrs) {
   for (var i = 0; i < rules.length; i += 1) {
     var rule = rules[i];
@@ -3929,6 +4115,11 @@ var isHRMEnabled = typeof module !== 'undefined' && module.hot && "development" 
  the React-specific stuff.
  */
 var _ComponentStyle = (function (nameGenerator, flatten, stringifyRules) {
+  /* combines hashStr (murmurhash) and nameGenerator for convenience */
+  var generateRuleHash = function generateRuleHash(str) {
+    return nameGenerator(murmurhash(str));
+  };
+
   var ComponentStyle = function () {
     function ComponentStyle(rules, attrs, componentId) {
       classCallCheck(this, ComponentStyle);
@@ -3936,9 +4127,11 @@ var _ComponentStyle = (function (nameGenerator, flatten, stringifyRules) {
       this.rules = rules;
       this.isStatic = !isHRMEnabled && isStaticRules(rules, attrs);
       this.componentId = componentId;
-      if (!StyleSheet.instance.hasInjectedComponent(this.componentId)) {
-        var placeholder =  true ? '.' + componentId + ' {}' : '';
-        StyleSheet.instance.deferredInject(componentId, true, [placeholder]);
+
+      if (!StyleSheet.master.hasId(componentId)) {
+        var placeholder =  true ? ['.' + componentId + ' {}'] : [];
+
+        StyleSheet.master.deferredInject(componentId, placeholder);
       }
     }
 
@@ -3951,44 +4144,27 @@ var _ComponentStyle = (function (nameGenerator, flatten, stringifyRules) {
 
     ComponentStyle.prototype.generateAndInjectStyles = function generateAndInjectStyles(executionContext, styleSheet) {
       var isStatic = this.isStatic,
+          componentId = this.componentId,
           lastClassName = this.lastClassName;
 
-      if (isStatic && lastClassName !== undefined) {
+      if (areStylesCacheable && isStatic && lastClassName !== undefined) {
         return lastClassName;
       }
 
       var flatCSS = flatten(this.rules, executionContext);
-      var hash = doHash(this.componentId + flatCSS.join(''));
+      var name = generateRuleHash(this.componentId + flatCSS.join(''));
 
-      var stylesCacheable = styleSheet.stylesCacheable;
-
-      var existingName = styleSheet.getName(hash);
-
-      if (existingName !== undefined) {
-        if (stylesCacheable) {
-          this.lastClassName = existingName;
-        }
-        return existingName;
+      if (!styleSheet.hasNameForId(componentId, name)) {
+        var css = stringifyRules(flatCSS, '.' + name);
+        styleSheet.inject(this.componentId, css, name);
       }
 
-      var name = nameGenerator(hash);
-      if (stylesCacheable) {
-        this.lastClassName = existingName;
-      }
-      if (styleSheet.alreadyInjected(hash, name)) {
-        return name;
-      }
-
-      var css = stringifyRules(flatCSS, '.' + name);
-      // NOTE: this can only be set when we inject the class-name.
-      // For some reason, presumably due to how css is stringifyRules behaves in
-      // differently between client and server, styles break.
-      styleSheet.inject(this.componentId, true, css, hash, name);
+      this.lastClassName = name;
       return name;
     };
 
     ComponentStyle.generateName = function generateName(str) {
-      return nameGenerator(doHash(str));
+      return generateRuleHash(str);
     };
 
     return ComponentStyle;
@@ -4003,7 +4179,7 @@ var _ComponentStyle = (function (nameGenerator, flatten, stringifyRules) {
 var domElements = ['a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'bdi', 'bdo', 'big', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'legend', 'li', 'link', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meta', 'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option', 'output', 'p', 'param', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script', 'section', 'select', 'small', 'source', 'span', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr',
 
 // SVG
-'circle', 'clipPath', 'defs', 'ellipse', 'g', 'image', 'line', 'linearGradient', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop', 'svg', 'text', 'tspan'];
+'circle', 'clipPath', 'defs', 'ellipse', 'foreignObject', 'g', 'image', 'line', 'linearGradient', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop', 'svg', 'text', 'tspan'];
 
 // 
 var _styled = (function (styledComponent, constructWithOptions) {
@@ -4025,40 +4201,31 @@ var replaceWhitespace = function replaceWhitespace(str) {
 };
 
 var _keyframes = (function (nameGenerator, stringifyRules, css) {
-  return function (strings) {
-    for (var _len = arguments.length, interpolations = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      interpolations[_key - 1] = arguments[_key];
+  return function () {
+    var styleSheet = StyleSheet.master;
+    var rules = css.apply(undefined, arguments);
+    var name = nameGenerator(murmurhash(replaceWhitespace(JSON.stringify(rules))));
+    var id = 'sc-keyframes-' + name;
+
+    if (!styleSheet.hasNameForId(id, name)) {
+      styleSheet.inject(id, stringifyRules(rules, name, '@keyframes'), name);
     }
 
-    var rules = css.apply(undefined, [strings].concat(interpolations));
-    var hash = doHash(replaceWhitespace(JSON.stringify(rules)));
-
-    var existingName = StyleSheet.instance.getName(hash);
-    if (existingName) return existingName;
-
-    var name = nameGenerator(hash);
-    if (StyleSheet.instance.alreadyInjected(hash, name)) return name;
-
-    var generatedCSS = stringifyRules(rules, name, '@keyframes');
-    StyleSheet.instance.inject('sc-keyframes-' + name, true, generatedCSS, hash, name);
     return name;
   };
 });
 
 // 
 var _injectGlobal = (function (stringifyRules, css) {
-  var injectGlobal = function injectGlobal(strings) {
-    for (var _len = arguments.length, interpolations = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      interpolations[_key - 1] = arguments[_key];
+  var injectGlobal = function injectGlobal() {
+    var styleSheet = StyleSheet.master;
+    var rules = css.apply(undefined, arguments);
+    var hash = murmurhash(JSON.stringify(rules));
+    var id = 'sc-global-' + hash;
+
+    if (!styleSheet.hasId(id)) {
+      styleSheet.inject(id, stringifyRules(rules));
     }
-
-    var rules = css.apply(undefined, [strings].concat(interpolations));
-    var hash = doHash(JSON.stringify(rules));
-
-    var componentId = 'sc-global-' + hash;
-    if (StyleSheet.instance.hasInjectedComponent(componentId)) return;
-
-    StyleSheet.instance.inject(componentId, false, stringifyRules(rules));
   };
 
   return injectGlobal;
@@ -4075,12 +4242,9 @@ var _constructWithOptions = (function (css) {
     }
 
     /* This is callable directly as a template function */
-    var templateFunction = function templateFunction(strings) {
-      for (var _len = arguments.length, interpolations = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        interpolations[_key - 1] = arguments[_key];
-      }
-
-      return componentConstructor(tag, options, css.apply(undefined, [strings].concat(interpolations)));
+    // $FlowFixMe: Not typed to avoid destructuring arguments
+    var templateFunction = function templateFunction() {
+      return componentConstructor(tag, options, css.apply(undefined, arguments));
     };
 
     /* If config methods are called, wrap up a new template function and merge options */
@@ -4193,13 +4357,33 @@ var wrapWithTheme = function wrapWithTheme(Component$$1) {
 
 // 
 
+/* eslint-disable */
+var __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS = {
+  StyleSheet: StyleSheet
+};
+
+// 
+
 /* Import singletons */
 /* Import singleton constructors */
 /* Import components */
 /* Import Higher Order Components */
 /* Warning if you've imported this file on React Native */
 if ("development" !== 'production' && typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+  // eslint-disable-next-line no-console
   console.warn("It looks like you've imported 'styled-components' on React Native.\n" + "Perhaps you're looking to import 'styled-components/native'?\n" + 'Read more about this at https://www.styled-components.com/docs/basics#react-native');
+}
+
+/* Warning if there are several instances of styled-components */
+if ("development" !== 'production' && typeof window !== 'undefined') {
+  window['__styled-components-init__'] = window['__styled-components-init__'] || 0;
+
+  if (window['__styled-components-init__'] === 1) {
+    // eslint-disable-next-line no-console
+    console.warn("It looks like there are several instances of 'styled-components' initialized in this application. " + 'This may cause dynamic styles not rendering properly, errors happening during rehydration process ' + 'and makes you application bigger without a good reason.\n\n' + 'See https://s-c.sh/2BAXzed for more info.');
+  }
+
+  window['__styled-components-init__'] += 1;
 }
 
 /* Instantiate singletons */
@@ -4211,8 +4395,6 @@ var StyledComponent = _StyledComponent(ComponentStyle, constructWithOptions);
 var keyframes = _keyframes(generateAlphabeticName, stringifyRules, css);
 var injectGlobal = _injectGlobal(stringifyRules, css);
 var styled = _styled(StyledComponent, constructWithOptions);
-
-/* Export everything */
 
 
 /* harmony default export */ __webpack_exports__["a"] = (styled);
@@ -4322,7 +4504,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 						case 112:
 							return insertRule(selectors[0]+content), ''
 						default:
-							return content + delimiter
+							return content + (depth === 0 ? delimiter : '')
 					}
 				case -2:
 					content.split(needle).forEach(toSheet)
@@ -4713,7 +4895,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 								// execute plugins, @at-rule context
 								if (plugged > 0) {
 									selector = select(array, chars, invert)
-									result = proxy(ATRUL, child, selector, current, line, column, length, second, depth)
+									result = proxy(ATRUL, child, selector, current, line, column, length, second, depth, id)
 									chars = selector.join('')
 
 									if (result !== void 0) {
@@ -4797,7 +4979,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 							// execute plugins, property context
 							if (plugged > 0) {
-								if ((result = proxy(PROPS, chars, current, parent, line, column, out.length, id, depth)) !== void 0) {
+								if ((result = proxy(PROPS, chars, current, parent, line, column, out.length, id, depth, id)) !== void 0) {
 									if ((length = (chars = result.trim()).length) === 0) {
 										chars = '\0\0'
 									}
@@ -4883,7 +5065,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 					// execute plugins, newline context
 					if (plugged * unkwn > 0) {
-						proxy(UNKWN, chars, current, parent, line, column, out.length, id, depth)
+						proxy(UNKWN, chars, current, parent, line, column, out.length, id, depth, id)
 					}
 
 					// next line, reset column position
@@ -5193,7 +5375,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 			// execute plugins, block context
 			if (plugged > 0) {
-				result = proxy(BLCKS, out, selector, parent, line, column, length, id, depth)
+				result = proxy(BLCKS, out, selector, parent, line, column, length, id, depth, id)
 
 				if (result !== void 0 && (out = result).length === 0) {
 					return flat + out + children
@@ -5767,11 +5949,12 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 	 * @param {number} length
 	 * @param {number} id
 	 * @param {number} depth
+	 * @param {number} at
 	 * @return {(string|void|*)}
 	 */
-	function proxy (context, content, selectors, parents, line, column, length, id, depth) {
+	function proxy (context, content, selectors, parents, line, column, length, id, depth, at) {
 		for (var i = 0, out = content, next; i < plugged; ++i) {
-			switch (next = plugins[i].call(stylis, context, out, selectors, parents, line, column, length, id, depth)) {
+			switch (next = plugins[i].call(stylis, context, out, selectors, parents, line, column, length, id, depth, at)) {
 				case void 0:
 				case false:
 				case true:
@@ -5920,7 +6103,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 		// execute plugins, pre-process context
 		if (plugged > 0) {
-			result = proxy(PREPS, input, selectors, selectors, line, column, 0, 0, 0)
+			result = proxy(PREPS, input, selectors, selectors, line, column, 0, 0, 0, 0)
 
 			if (result !== void 0 && typeof result === 'string') {
 				input = result
@@ -5932,7 +6115,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 		// execute plugins, post-process context
 		if (plugged > 0) {
-			result = proxy(POSTS, output, selectors, selectors, line, column, output.length, 0, 0)
+			result = proxy(POSTS, output, selectors, selectors, line, column, output.length, 0, 0, 0)
 
 			// bypass minification
 			if (result !== void 0 && typeof(output = result) !== 'string') {
@@ -6002,7 +6185,7 @@ module.exports = function(originalModule) {
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/cjs/react.development.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js';
+var _jsxFileName = '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6021,6 +6204,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var PLAY = "/static/play.svg";
+var PAUSE = "/static/pause.svg";
+
 var Audio = function (_React$Component) {
   _inherits(Audio, _React$Component);
 
@@ -6038,26 +6224,8 @@ var Audio = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Audio.__proto__ || Object.getPrototypeOf(Audio)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       currentTime: '00:00',
       value: 0,
-      duration: '00:00'
-    }, _this.onLoadedMetadata = function (e) {
-      var currentTime = _this.parseCurrentTime(e.target);
-      var duration = _this.parseDuration(e.target);
-      _this.setState({
-        currentTime: currentTime,
-        duration: duration
-      });
-    }, _this.onPlaying = function () {
-      var currentTime = _this.parseCurrentTime(_this.audio);
-      var value = _this.parseValue(_this.audio);
-      _this.setState({
-        currentTime: currentTime,
-        value: value
-      });
-    }, _this.onClickHandler = function () {
-      _this.audio.play();
-      setInterval(function () {
-        _this.onPlaying();
-      }, 500);
+      duration: '00:00',
+      isPlay: false
     }, _this.parseDuration = function (audio) {
       var duration = audio.duration;
       var minutes = Math.floor(duration / 60).toString();
@@ -6073,12 +6241,52 @@ var Audio = function (_React$Component) {
       var duration = audio.duration;
       var currentTime = audio.currentTime;
       return currentTime / duration;
-    }, _this.seek = function (evt) {
-      var percent = evt.x;
+    }, _this.convertValueToCurrentTime = function (value) {
+      var seconds = value * _this.audio.duration;
+      _this.audio.currentTime = seconds;
+      return _this.audio.currentTime;
+    }, _this.onLoadedMetadata = function (e) {
+      var currentTime = _this.parseCurrentTime(e.target);
+      var duration = _this.parseDuration(e.target);
       _this.setState({
-        currentTime: percent * _this.audio.duration,
-        value: percent / 100
+        currentTime: currentTime,
+        duration: duration
       });
+    }, _this.onPlaying = function () {
+      var currentTime = _this.parseCurrentTime(_this.audio);
+      var value = _this.parseValue(_this.audio);
+      _this.setState({
+        currentTime: currentTime,
+        value: value
+      });
+    }, _this.onInput = function (e) {
+      _this.convertValueToCurrentTime(e.target.value);
+      var currentTime = _this.parseCurrentTime(_this.audio);
+      _this.setState({
+        currentTime: currentTime,
+        value: e.target.value
+      });
+    }, _this.onClickHandler = function () {
+      if (!_this.state.isPlaying) {
+        // play the audio
+        _this.audio.play();
+
+        // start tracking the currentTime
+        setInterval(function () {
+          _this.onPlaying();
+        }, 500);
+
+        // switch the play pause icon
+        _this.setState({
+          isPlaying: true
+        });
+      } else {
+        // pause the audio
+        _this.audio.pause();
+        _this.setState({
+          isPlaying: false
+        });
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -6092,73 +6300,70 @@ var Audio = function (_React$Component) {
           children = _props.children,
           albumArt = _props.albumArt,
           albumName = _props.albumName;
+      var _state = this.state,
+          currentTime = _state.currentTime,
+          duration = _state.duration,
+          isPlaying = _state.isPlaying,
+          value = _state.value;
 
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: className, __source: {
             fileName: _jsxFileName,
-            lineNumber: 71
+            lineNumber: 99
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'audio',
           { ref: function ref(audio) {
               return _this2.audio = audio;
-            }, onLoadedMetadata: this.onLoadedMetadata, onPlaying: this.onPlaying, onPlay: this.onPlaying, __source: {
+            }, onLoadedMetadata: this.onLoadedMetadata, onPlaying: this.onPlaying, __source: {
               fileName: _jsxFileName,
-              lineNumber: 72
+              lineNumber: 100
             }
           },
           children
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'http://www.lukeduncan.me/images/play-button.png', onClick: this.onClickHandler, alt: 'Play', className: 'play', __source: {
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: isPlaying ? PAUSE : PLAY, onClick: this.onClickHandler, alt: 'Play', className: 'play', __source: {
             fileName: _jsxFileName,
-            lineNumber: 75
+            lineNumber: 103
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'progress-container', __source: {
               fileName: _jsxFileName,
-              lineNumber: 76
+              lineNumber: 104
             }
           },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('progress', { value: this.state.value, max: 1, onClick: this.seek, __source: {
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'span',
+            { className: 'progress-label', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 105
+              }
+            },
+            currentTime
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', value: value, max: 1, step: 0.01, onInput: this.onInput, __source: {
               fileName: _jsxFileName,
-              lineNumber: 77
+              lineNumber: 106
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'progress-label-container', __source: {
+            'span',
+            { className: 'progress-label', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 78
+                lineNumber: 107
               }
             },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'progress-label', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 79
-                }
-              },
-              this.state.currentTime
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'progress-label', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 80
-                }
-              },
-              this.state.duration
-            )
+            duration
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: albumArt, alt: albumName, __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 109
           }
         })
       );
@@ -6173,10 +6378,10 @@ var Audio = function (_React$Component) {
   return Audio;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-var StyledAudio = /*#__PURE__*/Object(__WEBPACK_IMPORTED_MODULE_1_styled_components__["a" /* default */])(Audio).withConfig({
+var StyledAudio = Object(__WEBPACK_IMPORTED_MODULE_1_styled_components__["a" /* default */])(Audio).withConfig({
   displayName: 'audio__StyledAudio',
   componentId: 'ial0gw-0'
-})(['border:1px solid gray;background:aquamarine;display:flex;width:50%;height:100px;justify-content:space-between;align-items:center;margin:1vh;padding-left:1%;box-sizing:border-box;.play{height:50%;}.progress-container{width:30vw;display:flex;flex-direction:column;progress{width:100%;}.progress-label-container{display:flex;justify-content:space-between;.progress-label{color:white;}}}img{height:100%;}']);
+})(['border:1px solid gray;background:aquamarine;display:flex;width:50%;height:100px;justify-content:space-between;align-items:center;margin:1vh;padding-left:1%;box-sizing:border-box;.play{height:50%;}.progress-container{width:65%;display:flex;align-items:center;.progress-bg,.progress-fg{height:7px;}input[type=range]{-webkit-appearance:none;width:100%;margin:6px;}input[type=range]:focus{outline:none;}input[type=range]::-webkit-slider-runnable-track{width:100%;height:6px;cursor:pointer;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;background:#fc7f2d;border-radius:1.5px;border:0.2px solid rgba(0,0,0,0);}input[type=range]::-webkit-slider-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#63ffff;cursor:pointer;-webkit-appearance:none;margin-top:-6.2px;}input[type=range]:focus::-webkit-slider-runnable-track{background:#fc8e46;}input[type=range]::-moz-range-track{width:100%;height:6px;cursor:pointer;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;background:#fc7f2d;border-radius:1.5px;border:0.2px solid rgba(0,0,0,0);}input[type=range]::-moz-range-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#63ffff;cursor:pointer;}input[type=range]::-ms-track{width:100%;height:6px;cursor:pointer;background:transparent;border-color:transparent;color:transparent;}input[type=range]::-ms-fill-lower{background:#fc7014;border:0.2px solid rgba(0,0,0,0);border-radius:3px;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;}input[type=range]::-ms-fill-upper{background:#fc7f2d;border:0.2px solid rgba(0,0,0,0);border-radius:3px;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;}input[type=range]::-ms-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#63ffff;cursor:pointer;height:6px;}input[type=range]:focus::-ms-fill-lower{background:#fc7f2d;}input[type=range]:focus::-ms-fill-upper{background:#fc8e46;}.progress-label{color:white;font-family:\'Space Mono\',monospace;}}img{height:100%;}']);
 
 var _default = StyledAudio;
 /* harmony default export */ __webpack_exports__["a"] = (_default);
@@ -6191,9 +6396,11 @@ var _default = StyledAudio;
     return;
   }
 
-  reactHotLoader.register(Audio, 'Audio', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js');
-  reactHotLoader.register(StyledAudio, 'StyledAudio', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js');
-  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/audio.js');
+  reactHotLoader.register(PLAY, 'PLAY', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js');
+  reactHotLoader.register(PAUSE, 'PAUSE', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js');
+  reactHotLoader.register(Audio, 'Audio', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js');
+  reactHotLoader.register(StyledAudio, 'StyledAudio', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js');
+  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js');
   leaveModule(module);
 })();
 
@@ -6227,7 +6434,7 @@ var _default = StyledAudio;
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/cjs/react.development.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/header.js';
+var _jsxFileName = '/Users/parkerziegler/Documents/repos/repertoire/pages/components/header.js';
 
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/patch.js").enterModule;
@@ -6261,7 +6468,7 @@ var Header = function Header(_ref) {
   );
 };
 
-var StyledHeader = /*#__PURE__*/Object(__WEBPACK_IMPORTED_MODULE_1_styled_components__["a" /* default */])(Header).withConfig({
+var StyledHeader = Object(__WEBPACK_IMPORTED_MODULE_1_styled_components__["a" /* default */])(Header).withConfig({
   displayName: 'header__StyledHeader',
   componentId: 's1lh7xj6-0'
 })(['background-color:#222;color:#fff;display:flex;flex-flow:row nowrap;align-items:center;height:3em;width:100%;h1{font-size:25px;font-family:\'Space Mono\',monospace;margin-left:4em;}']);
@@ -6279,9 +6486,9 @@ var _default = StyledHeader;
     return;
   }
 
-  reactHotLoader.register(Header, 'Header', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/header.js');
-  reactHotLoader.register(StyledHeader, 'StyledHeader', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/header.js');
-  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/components/header.js');
+  reactHotLoader.register(Header, 'Header', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/header.js');
+  reactHotLoader.register(StyledHeader, 'StyledHeader', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/header.js');
+  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/repertoire/pages/components/header.js');
   leaveModule(module);
 })();
 
@@ -6317,7 +6524,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_header__ = __webpack_require__("./pages/components/header.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_audio__ = __webpack_require__("./pages/components/audio.js");
-var _jsxFileName = '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/index.js';
+var _jsxFileName = '/Users/parkerziegler/Documents/repos/repertoire/pages/index.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6425,8 +6632,8 @@ var _default = function _default() {
     return;
   }
 
-  reactHotLoader.register(App, 'App', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/index.js');
-  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/OSS/repertoire/pages/index.js');
+  reactHotLoader.register(App, 'App', '/Users/parkerziegler/Documents/repos/repertoire/pages/index.js');
+  reactHotLoader.register(_default, 'default', '/Users/parkerziegler/Documents/repos/repertoire/pages/index.js');
   leaveModule(module);
 })();
 

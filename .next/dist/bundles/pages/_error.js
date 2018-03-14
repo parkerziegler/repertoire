@@ -72,17 +72,17 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "/Users/parkerziegler/Documents/repos/OSS/repertoire/node_modules/next/dist/pages/_error.js":
+/***/ "/Users/parkerziegler/Documents/repos/repertoire/node_modules/next/dist/pages/_error.js":
 /***/ (function(module, exports) {
 
-module.exports = require("/Users/parkerziegler/Documents/repos/OSS/repertoire/node_modules/next/dist/pages/_error.js");
+module.exports = require("/Users/parkerziegler/Documents/repos/repertoire/node_modules/next/dist/pages/_error.js");
 
 /***/ }),
 
 /***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("/Users/parkerziegler/Documents/repos/OSS/repertoire/node_modules/next/dist/pages/_error.js");
+module.exports = __webpack_require__("/Users/parkerziegler/Documents/repos/repertoire/node_modules/next/dist/pages/_error.js");
 
 
 /***/ })
