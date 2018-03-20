@@ -1,5 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import ImagePalette from 'react-image-palette';
+
+import Play from './Play';
+import Pause from './Pause';
+import Forward from './Forward';
+import Reverse from './Reverse';
 
 const PLAY = "/static/play.svg";
 const PAUSE = "/static/pause.svg";
@@ -96,40 +102,55 @@ class Audio extends React.Component {
     const { currentTime, duration, isPlaying, value } = this.state;
 
     return (
-      <div className={className}>
-        <audio ref={audio => this.audio = audio} onLoadedMetadata={this.onLoadedMetadata} onPlaying={this.onPlaying}>
-          {children}
-        </audio>
-        <img src={isPlaying ? PAUSE : PLAY} onClick={this.onClickHandler} alt="Play" className="play" />
-        <div className="progress-container">
-          <span className="progress-label">{currentTime}</span>
-          <input type="range" value={value} max={1} step={0.01} onInput={this.onInput} />
-          <span className="progress-label">{duration}</span>
-        </div>
-        <img src={albumArt} alt={albumName} />
-      </div>
+      <ImagePalette image={albumArt}>
+        {({ backgroundColor, color, alternativeColor }) => (
+          <div className={className} style={{ backgroundColor }}>
+            <audio ref={audio => this.audio = audio} onLoadedMetadata={this.onLoadedMetadata} onPlaying={this.onPlaying}>
+              {children}
+            </audio>
+            <div className="controls">
+              <Reverse onHold={this.onClickHandler} fill={color} stroke={color} />
+              {isPlaying
+                ? <Pause onClick={this.onClickHandler} fill={color} stroke={color} />
+                : <Play onClick={this.onClickHandler} fill={color} stroke={color} />
+              }
+              <Forward onHold={this.onClickHandler} fill={color} stroke={color} />
+            </div>
+            <div className="progress-container">
+              <span className="progress-label" style={{ color }}>{currentTime}</span>
+              <input type="range" value={value} max={1} step={0.01} onInput={this.onInput} style={{ backgroundColor: color }} />
+              <span className="progress-label" style={{ color }}>{duration}</span>
+            </div>
+            <img src={albumArt} alt={albumName} /> 
+          </div>
+        )}
+      </ImagePalette>
     );
   }
 }
 
 const StyledAudio = styled(Audio)`
-  border: 1px solid gray;
-  background: aquamarine;
   display: flex;
   width: 50%;
   height: 100px;
   justify-content: space-between;
   align-items: center;
   margin: 1vh;
-  padding-left: 1%;
   box-sizing: border-box;
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+  }
 
   .play {
     height: 50%;
   }
 
   .progress-container {
-    width: 65%;
+    width: 55%;
     display: flex;
     align-items: center;
 
@@ -152,7 +173,6 @@ const StyledAudio = styled(Audio)`
       height: 6px;
       cursor: pointer;
       box-shadow: 1.5px 1.5px 2.1px #000000, 0px 0px 1.5px #0d0d0d;
-      background: #fc7f2d;
       border-radius: 1.5px;
       border: 0.2px solid rgba(0, 0, 0, 0);
     }
@@ -163,14 +183,15 @@ const StyledAudio = styled(Audio)`
       height: 18px;
       width: 18px;
       border-radius: 9px;
-      background: #63ffff;
+      background: #fff;
       cursor: pointer;
       -webkit-appearance: none;
       margin-top: -6.2px;
     }
 
     input[type=range]:focus::-webkit-slider-runnable-track {
-      background: #fc8e46;
+      background: inherit;
+      opacity: 0.5;
     }
 
     input[type=range]::-moz-range-track {
@@ -178,7 +199,6 @@ const StyledAudio = styled(Audio)`
       height: 6px;
       cursor: pointer;
       box-shadow: 1.5px 1.5px 2.1px #000000, 0px 0px 1.5px #0d0d0d;
-      background: #fc7f2d;
       border-radius: 1.5px;
       border: 0.2px solid rgba(0, 0, 0, 0);
     }
@@ -189,7 +209,7 @@ const StyledAudio = styled(Audio)`
       height: 18px;
       width: 18px;
       border-radius: 9px;
-      background: #63ffff;
+      background: #fff;
       cursor: pointer;
     }
 
@@ -222,17 +242,17 @@ const StyledAudio = styled(Audio)`
       height: 18px;
       width: 18px;
       border-radius: 9px;
-      background: #63ffff;
+      background: #fff;
       cursor: pointer;
       height: 6px;
     }
 
     input[type=range]:focus::-ms-fill-lower {
-      background: #fc7f2d;
+      background: inherit;
     }
 
     input[type=range]:focus::-ms-fill-upper {
-      background: #fc8e46;
+      background: inherit;
     }
 
     .progress-label {

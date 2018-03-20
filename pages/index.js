@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/header';
-import Audio from './components/audio';
+import Audio from './components/Audio';
 
 class App extends React.Component {
 

@@ -72,7 +72,7 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./pages/components/audio.js":
+/***/ "./pages/components/Audio.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80,7 +80,13 @@ module.exports =
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_components__ = __webpack_require__("styled-components");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_styled_components__);
-var _jsxFileName = '/Users/parkerziegler/Documents/repos/repertoire/pages/components/audio.js';
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_image_palette__ = __webpack_require__("react-image-palette");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_image_palette___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_image_palette__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Play__ = __webpack_require__("./pages/components/Play.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Pause__ = __webpack_require__("./pages/components/Pause.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Forward__ = __webpack_require__("./pages/components/Forward.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Reverse__ = __webpack_require__("./pages/components/Reverse.js");
+var _jsxFileName = '/Users/parkerziegler/Documents/repos/repertoire/pages/components/Audio.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -89,6 +95,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
 
 
 
@@ -197,64 +209,99 @@ var Audio = function (_React$Component) {
 
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: className, __source: {
+        __WEBPACK_IMPORTED_MODULE_2_react_image_palette___default.a,
+        { image: albumArt, __source: {
             fileName: _jsxFileName,
-            lineNumber: 99
+            lineNumber: 105
           }
         },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'audio',
-          { ref: function ref(audio) {
-              return _this2.audio = audio;
-            }, onLoadedMetadata: this.onLoadedMetadata, onPlaying: this.onPlaying, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 100
-            }
-          },
-          children
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: isPlaying ? PAUSE : PLAY, onClick: this.onClickHandler, alt: 'Play', className: 'play', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 103
-          }
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'progress-container', __source: {
-              fileName: _jsxFileName,
-              lineNumber: 104
-            }
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'span',
-            { className: 'progress-label', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 105
-              }
-            },
-            currentTime
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', value: value, max: 1, step: 0.01, onInput: this.onInput, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 106
-            }
-          }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'span',
-            { className: 'progress-label', __source: {
+        function (_ref2) {
+          var backgroundColor = _ref2.backgroundColor,
+              color = _ref2.color,
+              alternativeColor = _ref2.alternativeColor;
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: className, style: { backgroundColor: backgroundColor }, __source: {
                 fileName: _jsxFileName,
                 lineNumber: 107
               }
             },
-            duration
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: albumArt, alt: albumName, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 109
-          }
-        })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'audio',
+              { ref: function ref(audio) {
+                  return _this2.audio = audio;
+                }, onLoadedMetadata: _this2.onLoadedMetadata, onPlaying: _this2.onPlaying, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 108
+                }
+              },
+              children
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'controls', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 111
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Reverse__["a" /* default */], { onHold: _this2.onClickHandler, fill: color, stroke: color, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 112
+                }
+              }),
+              isPlaying ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Pause__["a" /* default */], { onClick: _this2.onClickHandler, fill: color, stroke: color, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 114
+                }
+              }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Play__["a" /* default */], { onClick: _this2.onClickHandler, fill: color, stroke: color, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 115
+                }
+              }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Forward__["a" /* default */], { onHold: _this2.onClickHandler, fill: color, stroke: color, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 117
+                }
+              })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'progress-container', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 119
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                { className: 'progress-label', style: { color: color }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 120
+                  }
+                },
+                currentTime
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', value: value, max: 1, step: 0.01, onInput: _this2.onInput, style: { backgroundColor: color }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 121
+                }
+              }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                { className: 'progress-label', style: { color: color }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 122
+                  }
+                },
+                duration
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: albumArt, alt: albumName, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 124
+              }
+            })
+          );
+        }
       );
     }
   }]);
@@ -263,11 +310,194 @@ var Audio = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 var StyledAudio = __WEBPACK_IMPORTED_MODULE_1_styled_components___default()(Audio).withConfig({
-  displayName: 'audio__StyledAudio',
-  componentId: 'ial0gw-0'
-})(['border:1px solid gray;background:aquamarine;display:flex;width:50%;height:100px;justify-content:space-between;align-items:center;margin:1vh;padding-left:1%;box-sizing:border-box;.play{height:50%;}.progress-container{width:65%;display:flex;align-items:center;.progress-bg,.progress-fg{height:7px;}input[type=range]{-webkit-appearance:none;width:100%;margin:6px;}input[type=range]:focus{outline:none;}input[type=range]::-webkit-slider-runnable-track{width:100%;height:6px;cursor:pointer;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;background:#fc7f2d;border-radius:1.5px;border:0.2px solid rgba(0,0,0,0);}input[type=range]::-webkit-slider-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#63ffff;cursor:pointer;-webkit-appearance:none;margin-top:-6.2px;}input[type=range]:focus::-webkit-slider-runnable-track{background:#fc8e46;}input[type=range]::-moz-range-track{width:100%;height:6px;cursor:pointer;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;background:#fc7f2d;border-radius:1.5px;border:0.2px solid rgba(0,0,0,0);}input[type=range]::-moz-range-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#63ffff;cursor:pointer;}input[type=range]::-ms-track{width:100%;height:6px;cursor:pointer;background:transparent;border-color:transparent;color:transparent;}input[type=range]::-ms-fill-lower{background:#fc7014;border:0.2px solid rgba(0,0,0,0);border-radius:3px;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;}input[type=range]::-ms-fill-upper{background:#fc7f2d;border:0.2px solid rgba(0,0,0,0);border-radius:3px;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;}input[type=range]::-ms-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#63ffff;cursor:pointer;height:6px;}input[type=range]:focus::-ms-fill-lower{background:#fc7f2d;}input[type=range]:focus::-ms-fill-upper{background:#fc8e46;}.progress-label{color:white;font-family:\'Space Mono\',monospace;}}img{height:100%;}']);
+  displayName: 'Audio__StyledAudio',
+  componentId: 's1e7usdc-0'
+})(['display:flex;width:50%;height:100px;justify-content:space-between;align-items:center;margin:1vh;box-sizing:border-box;.controls{display:flex;align-items:center;justify-content:center;width:25%;}.play{height:50%;}.progress-container{width:55%;display:flex;align-items:center;.progress-bg,.progress-fg{height:7px;}input[type=range]{-webkit-appearance:none;width:100%;margin:6px;}input[type=range]:focus{outline:none;}input[type=range]::-webkit-slider-runnable-track{width:100%;height:6px;cursor:pointer;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;border-radius:1.5px;border:0.2px solid rgba(0,0,0,0);}input[type=range]::-webkit-slider-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#fff;cursor:pointer;-webkit-appearance:none;margin-top:-6.2px;}input[type=range]:focus::-webkit-slider-runnable-track{background:inherit;opacity:0.5;}input[type=range]::-moz-range-track{width:100%;height:6px;cursor:pointer;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;border-radius:1.5px;border:0.2px solid rgba(0,0,0,0);}input[type=range]::-moz-range-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#fff;cursor:pointer;}input[type=range]::-ms-track{width:100%;height:6px;cursor:pointer;background:transparent;border-color:transparent;color:transparent;}input[type=range]::-ms-fill-lower{background:#fc7014;border:0.2px solid rgba(0,0,0,0);border-radius:3px;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;}input[type=range]::-ms-fill-upper{background:#fc7f2d;border:0.2px solid rgba(0,0,0,0);border-radius:3px;box-shadow:1.5px 1.5px 2.1px #000000,0px 0px 1.5px #0d0d0d;}input[type=range]::-ms-thumb{box-shadow:1px 1px 1px #000000,0px 0px 1px #0d0d0d;border:1px solid rgba(0,0,0,0);height:18px;width:18px;border-radius:9px;background:#fff;cursor:pointer;height:6px;}input[type=range]:focus::-ms-fill-lower{background:inherit;}input[type=range]:focus::-ms-fill-upper{background:inherit;}.progress-label{color:white;font-family:\'Space Mono\',monospace;}}img{height:100%;}']);
 
 /* harmony default export */ __webpack_exports__["a"] = (StyledAudio);
+
+/***/ }),
+
+/***/ "./pages/components/Forward.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _jsxFileName = "/Users/parkerziegler/Documents/repos/repertoire/pages/components/Forward.js";
+
+
+var Forward = function Forward(_ref) {
+  var fill = _ref.fill,
+      stroke = _ref.stroke,
+      onHold = _ref.onHold;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "svg",
+    { xmlns: "http://www.w3.org/2000/svg",
+      width: "50",
+      height: "50",
+      viewBox: "0 0 50 50",
+      onHold: onHold,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 4
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", { cx: "25", cy: "25", r: "15", fill: "transparent", stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("polygon", { points: "19,20 26,25 19,30", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("polygon", { points: "26,20 33,25 26,30", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      }
+    })
+  );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Forward);
+
+/***/ }),
+
+/***/ "./pages/components/Pause.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _jsxFileName = "/Users/parkerziegler/Documents/repos/repertoire/pages/components/Pause.js";
+
+
+var Pause = function Pause(_ref) {
+  var fill = _ref.fill,
+      stroke = _ref.stroke,
+      onClick = _ref.onClick;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "svg",
+    { xmlns: "http://www.w3.org/2000/svg",
+      width: "50",
+      height: "50",
+      viewBox: "0 0 50 50",
+      onClick: onClick,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 4
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", { cx: "25", cy: "25", r: "20", fill: "transparent", stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("rect", { x: "17.5", y: "15", width: "5", height: "20", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("rect", { x: "27.5", y: "15", width: "5", height: "20", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      }
+    })
+  );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Pause);
+
+/***/ }),
+
+/***/ "./pages/components/Play.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _jsxFileName = "/Users/parkerziegler/Documents/repos/repertoire/pages/components/Play.js";
+
+
+var Play = function Play(_ref) {
+  var fill = _ref.fill,
+      stroke = _ref.stroke,
+      onClick = _ref.onClick;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "svg",
+    { xmlns: "http://www.w3.org/2000/svg",
+      width: "50",
+      height: "50",
+      viewBox: "0 0 50 50",
+      onClick: onClick,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 4
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", { cx: "25", cy: "25", r: "20", fill: "transparent", stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("polygon", { points: "20,15 35,25 20,35", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      }
+    })
+  );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Play);
+
+/***/ }),
+
+/***/ "./pages/components/Reverse.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _jsxFileName = "/Users/parkerziegler/Documents/repos/repertoire/pages/components/Reverse.js";
+
+
+var Reverse = function Reverse(_ref) {
+  var fill = _ref.fill,
+      stroke = _ref.stroke,
+      onHold = _ref.onHold;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "svg",
+    { xmlns: "http://www.w3.org/2000/svg",
+      width: "50",
+      height: "50",
+      viewBox: "0 0 50 50",
+      onHold: onHold,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 4
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", { cx: "25", cy: "25", r: "15", fill: "transparent", stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("polygon", { points: "23,20 17,25 23,30", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("polygon", { points: "30,20 23,25 30,30", fill: fill, stroke: stroke, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      }
+    })
+  );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Reverse);
 
 /***/ }),
 
@@ -323,7 +553,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("react");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_header__ = __webpack_require__("./pages/components/header.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_audio__ = __webpack_require__("./pages/components/audio.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Audio__ = __webpack_require__("./pages/components/Audio.js");
 var _jsxFileName = '/Users/parkerziegler/Documents/repos/repertoire/pages/index.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -374,7 +604,7 @@ var App = function (_React$Component) {
           'Repertoire'
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_2__components_audio__["a" /* default */],
+          __WEBPACK_IMPORTED_MODULE_2__components_Audio__["a" /* default */],
           {
             controls: true,
             albumArt: '/static/dixie-charles.jpg',
@@ -423,6 +653,13 @@ module.exports = __webpack_require__("./pages/index.js");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "react-image-palette":
+/***/ (function(module, exports) {
+
+module.exports = require("react-image-palette");
 
 /***/ }),
 
